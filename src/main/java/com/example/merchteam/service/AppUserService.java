@@ -1,5 +1,6 @@
 package com.example.merchteam.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,25 +45,39 @@ public class AppUserService<T extends AppUser> implements UserDetailsService {
 		userRepository.deleteById(id);
 	}
 
-	// TODO: add other properties
 	@Transactional
-	public void updateAppUser(Long id, String name, String email) {
+	public void updateAppUser(Long id, String name, String email, String password, String phone, LocalDate dob) {
 		// checking that AppUser exists
-		T AppUser = userRepository.findById(id)
+		T user = userRepository.findById(id)
 			.orElseThrow(() -> new IllegalStateException("AppUser with id " + id + " does not exist"));
 
 		// name
-		if (name != null && name.length() > 0 && !name.equals(AppUser.getName())) {
-			AppUser.setName(name);
+		if (name != null && name.length() > 0 && !name.equals(user.getName())) {
+			user.setName(name);
 		}
 
 		// email
-		if ((email != null) && (email.length() > 0) && !email.equals(AppUser.getEmail())) {
+		if ((email != null) && (email.length() > 0) && !email.equals(user.getEmail())) {
 			boolean alreadyExists = userRepository.findByEmail(email).isPresent();
 			if (alreadyExists) {
 				throw new IllegalStateException("email already taken");
 			}
-			AppUser.setEmail(email);
+			user.setEmail(email);
+		}
+
+		// password
+		if ((password != null) && (password.length() > 0) && !password.equals(user.getPassword())) {
+			user.setPassword(password);
+		}
+
+		// phone
+		if ((phone != null) && (phone.length() > 0) && !phone.equals(user.getPhone())) {
+			user.setPhone(phone);
+		}
+
+		// dob
+		if ((dob != null) && !dob.isEqual(user.getDob())) {
+			user.setDob(dob);
 		}
 	}
 
