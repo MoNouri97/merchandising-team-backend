@@ -8,7 +8,6 @@ import javax.persistence.Table;
 import com.example.merchteam.security.ApplicationUserRole;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table

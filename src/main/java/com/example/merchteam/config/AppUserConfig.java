@@ -3,10 +3,8 @@ package com.example.merchteam.config;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.example.merchteam.model.AppUser;
 import com.example.merchteam.model.Merchandiser;
 import com.example.merchteam.repository.AppUserRepository;
-import com.example.merchteam.security.ApplicationUserRole;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

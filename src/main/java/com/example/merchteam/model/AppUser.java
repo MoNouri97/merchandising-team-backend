@@ -3,7 +3,6 @@ package com.example.merchteam.model;
 import java.time.LocalDate;
 import java.util.Collection;
 
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
