@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public enum ApplicationUserRole {
-	STUDENT, ADMIN, ADMIN_TRAINEE;
+	MERCHANDISER, ADMIN, SUPERVISOR;
 
 	public List<SimpleGrantedAuthority> grantedAuthorities() {
 		return List.of(new SimpleGrantedAuthority("ROLE_" + this.name()));

@@ -1,4 +1,4 @@
-package com.example.merchteam.security;
+package com.example.merchteam.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

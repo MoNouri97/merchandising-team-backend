@@ -21,7 +21,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Service
 @ConfigurationProperties(prefix = "app.jwt")
 public class JwtUtil {
@@ -66,10 +70,26 @@ public class JwtUtil {
 		return claims.get(claim);
 	}
 
-	public Set<SimpleGrantedAuthority> extractAuthorities(Claims claims) {
+	public Set<SimpleGrantedAuthority> extractAuthorities(Claims claims) throws Exception {
+		Object extractedAuthorities = extractClaim(claims, "authorities");
+		if (!(extractedAuthorities instanceof Collection<?>)) {
+			throw new Exception("authorities extraction error, token issue");
+		}
+		var authorities = (Collection<?>) extractedAuthorities;
 		// authorities List must be mapped tp Set
-		var authorities = (Collection<Map<String, String>>) extractClaim(claims, "authorities");
-		return authorities.stream().map(m -> new SimpleGrantedAuthority(m.get("authority"))).collect(Collectors.toSet());
+		return authorities.stream().map(auth -> {
+			try {
+				if (!(auth instanceof Map<?, ?>)) {
+					throw new Exception("authorities extraction error, token issue");
+				}
+				var casted = (Map<?, ?>) auth;
+				return new SimpleGrantedAuthority(((String) casted.get("authority")));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}).collect(Collectors.toSet());
 	}
 
 	public Boolean IsTokenExpired(Claims claims) {
@@ -82,6 +102,7 @@ public class JwtUtil {
 	}
 
 	public String generateToken(String username, Map<String, Object> claims) {
+		System.out.println(secretKey + "---" + tokenPrefix + "----" + tokenExpirationDays);
 		// build token
 		return Jwts.builder()
 			.setSubject(username)
