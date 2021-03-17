@@ -1,5 +1,7 @@
 package com.example.merchteam.security;
 
+import com.example.merchteam.model.AppUser;
+import com.example.merchteam.service.AppUserService;
 import com.example.merchteam.util.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +11,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final JwtUtil jwtUtil;
-	private final UserDetailsService userDetailsService;
+	private final AppUserService<AppUser> userDetailsService;
 
 	@Autowired
-	public ApplicationSecurityConfig(UserDetailsService userDetailsService, JwtUtil jwtUtil) {
+	public ApplicationSecurityConfig(AppUserService<AppUser> userDetailsService, JwtUtil jwtUtil) {
 		this.userDetailsService = userDetailsService;
 		this.jwtUtil = jwtUtil;
 	}

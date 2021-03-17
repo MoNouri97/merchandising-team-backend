@@ -12,6 +12,7 @@ import com.example.merchteam.model.AuthRequest;
 import com.example.merchteam.model.AuthResponse;
 import com.example.merchteam.util.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,11 +32,16 @@ public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
 	}
 
 	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-		throws AuthenticationException {
+	public Authentication attemptAuthentication(
+		HttpServletRequest request,
+		HttpServletResponse response
+	) throws AuthenticationException {
 		try {
 			// map the request to UsernamePasswordAuthRequest.class
-			AuthRequest reqValue = new ObjectMapper().readValue(request.getInputStream(), AuthRequest.class);
+			AuthRequest reqValue = new ObjectMapper().readValue(
+				request.getInputStream(),
+				AuthRequest.class
+			);
 			// authenticate the request
 			Authentication authentication = new UsernamePasswordAuthenticationToken(
 				reqValue.getUsername(),
@@ -57,12 +63,13 @@ public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
 	) throws IOException,
 		ServletException {
 
-		String authHeader = jwtUtil.generateAuthHeader(
+		String authHeader = jwtUtil.generateAuthHeaderValue(
 			authResult.getName(),
-			Map.of("Authorities", authResult.getAuthorities())
+			Map.of("authorities", authResult.getAuthorities())
 		);
 		response.addHeader(jwtUtil.getAuthorizationHeader(), authHeader);
 		AuthResponse authResponse = new AuthResponse(authHeader, authResult.getName());
-		new ObjectMapper().writeValue(response.getWriter(), authResponse);
+		new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT)
+			.writeValue(response.getWriter(), authResponse);
 	}
 }

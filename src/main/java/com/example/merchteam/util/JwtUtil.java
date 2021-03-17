@@ -72,6 +72,9 @@ public class JwtUtil {
 
 	public Set<SimpleGrantedAuthority> extractAuthorities(Claims claims) throws Exception {
 		Object extractedAuthorities = extractClaim(claims, "authorities");
+		if (extractedAuthorities == null) {
+			return null;
+		}
 		if (!(extractedAuthorities instanceof Collection<?>)) {
 			throw new Exception("authorities extraction error, token issue");
 		}
@@ -102,7 +105,6 @@ public class JwtUtil {
 	}
 
 	public String generateToken(String username, Map<String, Object> claims) {
-		System.out.println(secretKey + "---" + tokenPrefix + "----" + tokenExpirationDays);
 		// build token
 		return Jwts.builder()
 			.setSubject(username)
@@ -113,7 +115,7 @@ public class JwtUtil {
 			.compact();
 	}
 
-	public String generateAuthHeader(String username, Map<String, Object> claims) {
+	public String generateAuthHeaderValue(String username, Map<String, Object> claims) {
 		return tokenPrefix + generateToken(username, claims);
 	}
 

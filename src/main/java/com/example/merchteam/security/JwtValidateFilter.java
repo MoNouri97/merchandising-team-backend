@@ -26,8 +26,11 @@ public class JwtValidateFilter extends OncePerRequestFilter {
 	}
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-		throws ServletException,
+	protected void doFilterInternal(
+		HttpServletRequest request,
+		HttpServletResponse response,
+		FilterChain filterChain
+	) throws ServletException,
 		IOException {
 		String authHeader = request.getHeader(jwtUtil.getAuthorizationHeader());
 		String jwt = jwtUtil.extractToken(authHeader);
@@ -45,7 +48,11 @@ public class JwtValidateFilter extends OncePerRequestFilter {
 			// authorities List must be mapped tp Set
 			Set<SimpleGrantedAuthority> authorities = jwtUtil.extractAuthorities(claims);
 			// authenticate user
-			Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
+			Authentication authentication = new UsernamePasswordAuthenticationToken(
+				username,
+				null,
+				authorities
+			);
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 		} catch (Exception e) {
 			throw new IllegalStateException("token cannot be trusted !!!");
