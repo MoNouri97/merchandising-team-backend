@@ -1,9 +1,10 @@
 package com.example.merchteam.config;
 
 import java.time.LocalDate;
-import java.util.List;
 
+import com.example.merchteam.model.Admin;
 import com.example.merchteam.model.Merchandiser;
+import com.example.merchteam.model.Supervisor;
 import com.example.merchteam.repository.AppUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +24,37 @@ public class AppUserConfig {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(AppUserRepository<Merchandiser> repository) {
+	CommandLineRunner commandLineRunner(
+		AppUserRepository<Merchandiser> merchRepo,
+		AppUserRepository<Admin> adminRepo,
+		AppUserRepository<Supervisor> sVisorRepo
+	) {
 		return (args -> {
-			final var user = new Merchandiser(
+			final Merchandiser merchandiser = new Merchandiser(
 				passwordEncoder.encode("0000"),
-				"user",
-				"user@spring.co",
+				"merchandiser",
+				"merch@spring.co",
+				"12123123",
+				LocalDate.of(1999, 2, 9)
+			);
+			final Supervisor supervisor = new Supervisor(
+				passwordEncoder.encode("0000"),
+				"supervisor",
+				"supervisor@spring.co",
+				"12123123",
+				LocalDate.of(1998, 2, 9)
+			);
+			final Admin admin = new Admin(
+				passwordEncoder.encode("0000"),
+				"admin",
+				"admin@spring.co",
 				"12123123",
 				LocalDate.of(1997, 2, 9)
 			);
 
-			repository.saveAll(List.of(user));
+			merchRepo.save(merchandiser);
+			sVisorRepo.save(supervisor);
+			adminRepo.save(admin);
 
 		});
 

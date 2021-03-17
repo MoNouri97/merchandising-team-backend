@@ -13,15 +13,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AppUserService<T extends AppUser> implements UserDetailsService {
 
 	private final AppUserRepository<T> userRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	@Autowired
-	public AppUserService(AppUserRepository<T> userRepository) {
+	public AppUserService(AppUserRepository<T> userRepository, PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
 		this.userRepository = userRepository;
 	}
 
@@ -29,12 +32,13 @@ public class AppUserService<T extends AppUser> implements UserDetailsService {
 		return userRepository.findAll();
 	}
 
-	public void addAppUser(T AppUser) {
-		Optional<T> AppUserOptional = userRepository.findByEmail(AppUser.getEmail());
+	public T addAppUser(T appUser) {
+		Optional<T> AppUserOptional = userRepository.findByEmail(appUser.getEmail());
 		if (AppUserOptional.isPresent()) {
 			throw new IllegalStateException("email already taken");
 		}
-		userRepository.save(AppUser);
+		appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+		return userRepository.save(appUser);
 	}
 
 	public void deleteAppUser(Long id) {
@@ -46,7 +50,14 @@ public class AppUserService<T extends AppUser> implements UserDetailsService {
 	}
 
 	@Transactional
-	public void updateAppUser(Long id, String name, String email, String password, String phone, LocalDate dob) {
+	public void updateAppUser(
+		Long id,
+		String name,
+		String email,
+		String password,
+		String phone,
+		LocalDate dob
+	) {
 		// checking that AppUser exists
 		T user = userRepository.findById(id)
 			.orElseThrow(() -> new IllegalStateException("AppUser with id " + id + " does not exist"));
@@ -88,6 +99,7 @@ public class AppUserService<T extends AppUser> implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User name not found"));
+		return userRepository.findByEmail(username)
+			.orElseThrow(() -> new UsernameNotFoundException("User name not found"));
 	}
 }

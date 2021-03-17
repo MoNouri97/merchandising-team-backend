@@ -3,6 +3,7 @@ package com.example.merchteam.model;
 import java.time.LocalDate;
 import java.util.Collection;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -10,11 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 
 import com.example.merchteam.security.ApplicationUserRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,11 +23,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+// @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
-@MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class AppUser implements UserDetails {
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class AppUser implements UserDetails {
 	/**
 	 * 
 	 *
@@ -35,7 +37,6 @@ public abstract class AppUser implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@JsonIgnore
 	private String password;
 	private String name;
 	private String email;
@@ -45,7 +46,14 @@ public abstract class AppUser implements UserDetails {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dob;
 
-	public AppUser(String password, String name, String email, String phone, ApplicationUserRole role, LocalDate dob) {
+	public AppUser(
+		String password,
+		String name,
+		String email,
+		String phone,
+		ApplicationUserRole role,
+		LocalDate dob
+	) {
 		this.password = password;
 		this.name = name;
 		this.email = email;
@@ -55,11 +63,13 @@ public abstract class AppUser implements UserDetails {
 	}
 
 	// #region getters & setters
+	@JsonIgnore
 	@Override
 	public String getPassword() {
 		return password;
 	}
 
+	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}

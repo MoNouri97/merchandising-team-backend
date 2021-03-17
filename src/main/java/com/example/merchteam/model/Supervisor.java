@@ -12,17 +12,18 @@ import lombok.AllArgsConstructor;
 @Entity
 @Table
 @AllArgsConstructor
-public class Merchandiser extends AppUser {
+public class Supervisor extends AppUser {
+
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = -9031840772715357682L;
+	private static final long serialVersionUID = 4927941512834047744L;
 
-	public Merchandiser(String password, String name, String email, String phone, LocalDate dob) {
-		super(password, name, email, phone, ApplicationUserRole.MERCHANDISER, dob);
+	public Supervisor(String password, String name, String email, String phone, LocalDate dob) {
+		super(password, name, email, phone, ApplicationUserRole.SUPERVISOR, dob);
 	}
 
-	public Merchandiser(AppUser user) {
+	public Supervisor(AppUser user) {
 		super(
 			user.getPassword(),
 			user.getName(),
@@ -31,7 +32,5 @@ public class Merchandiser extends AppUser {
 			ApplicationUserRole.MERCHANDISER,
 			user.getDob()
 		);
-
 	}
-
 }
