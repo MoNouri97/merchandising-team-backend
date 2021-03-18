@@ -9,8 +9,13 @@ import com.example.merchteam.model.Supervisor;
 import com.example.merchteam.service.AppUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +49,18 @@ public class AppUserController {
 		default:
 			return merchandiserService.addAppUser(new Merchandiser(user));
 		}
+	}
+
+	@PutMapping(value = "/{id}")
+	public AppUser updateUser(@PathVariable Long id, @RequestBody AppUser user) {
+		return userService.updateAppUser(id, user);
+	}
+
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<String> requestMethodName(@PathVariable Long id) {
+
+		userService.deleteAppUser(id);
+		return ResponseEntity.ok("User " + id + " deleted");
 	}
 
 }

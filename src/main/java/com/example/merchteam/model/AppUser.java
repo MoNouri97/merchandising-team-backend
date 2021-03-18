@@ -16,7 +16,7 @@ import com.example.merchteam.security.ApplicationUserRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -148,6 +148,10 @@ public class AppUser implements UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 }
