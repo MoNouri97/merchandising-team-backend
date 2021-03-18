@@ -9,8 +9,7 @@ import com.example.merchteam.model.Supervisor;
 import com.example.merchteam.service.AppUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +37,12 @@ public class AppUserController {
 		return userService.getAppUsers();
 	}
 
+	@GetMapping(value = "/{id}")
+	public AppUser getAppUser(@PathVariable Long id) {
+		return userService.getAppUser(id);
+	}
+
+	@Secured("ROLE_ADMIN")
 	@PostMapping()
 	public AppUser addUser(@RequestBody AppUser user) {
 		switch (user.getRole()) {
@@ -57,10 +62,8 @@ public class AppUserController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<String> requestMethodName(@PathVariable Long id) {
-
+	public void requestMethodName(@PathVariable Long id) {
 		userService.deleteAppUser(id);
-		return ResponseEntity.ok("User " + id + " deleted");
 	}
 
 }

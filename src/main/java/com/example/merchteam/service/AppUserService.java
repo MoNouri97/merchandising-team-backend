@@ -50,14 +50,12 @@ public class AppUserService<T extends AppUser> implements UserDetailsService {
 	}
 
 	@Transactional
-	public void updateAppUser(
-		Long id,
-		String name,
-		String email,
-		String password,
-		String phone,
-		LocalDate dob
-	) {
+	public T updateAppUser(Long id, AppUser updatedUser) {
+		String name = updatedUser.getName();
+		String email = updatedUser.getEmail();
+		String password = updatedUser.getPassword();
+		String phone = updatedUser.getPhone();
+		LocalDate dob = updatedUser.getDob();
 		// checking that AppUser exists
 		T user = userRepository.findById(id)
 			.orElseThrow(() -> new IllegalStateException("AppUser with id " + id + " does not exist"));
@@ -78,7 +76,7 @@ public class AppUserService<T extends AppUser> implements UserDetailsService {
 
 		// password
 		if ((password != null) && (password.length() > 0) && !password.equals(user.getPassword())) {
-			user.setPassword(password);
+			user.setPassword(passwordEncoder.encode(password));
 		}
 
 		// phone
@@ -90,6 +88,8 @@ public class AppUserService<T extends AppUser> implements UserDetailsService {
 		if ((dob != null) && !dob.isEqual(user.getDob())) {
 			user.setDob(dob);
 		}
+
+		return user;
 	}
 
 	public T getAppUser(Long id) {
