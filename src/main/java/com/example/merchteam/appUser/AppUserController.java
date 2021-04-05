@@ -1,12 +1,6 @@
-package com.example.merchteam.appUser.controller;
+package com.example.merchteam.appUser;
 
 import java.util.List;
-
-import com.example.merchteam.appUser.Admin;
-import com.example.merchteam.appUser.AppUser;
-import com.example.merchteam.appUser.AppUserService;
-import com.example.merchteam.appUser.Merchandiser;
-import com.example.merchteam.appUser.Supervisor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;

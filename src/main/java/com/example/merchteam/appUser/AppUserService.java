@@ -6,8 +6,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import com.example.merchteam.appUser.repository.AppUserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

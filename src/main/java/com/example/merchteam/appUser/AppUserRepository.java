@@ -1,8 +1,6 @@
-package com.example.merchteam.appUser.repository;
+package com.example.merchteam.appUser;
 
 import java.util.Optional;
-
-import com.example.merchteam.appUser.AppUser;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
