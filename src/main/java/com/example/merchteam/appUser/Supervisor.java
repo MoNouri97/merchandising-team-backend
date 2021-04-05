@@ -1,4 +1,4 @@
-package com.example.merchteam.model;
+package com.example.merchteam.appUser;
 
 import java.time.LocalDate;
 
@@ -12,18 +12,18 @@ import lombok.AllArgsConstructor;
 @Entity
 @Table
 @AllArgsConstructor
-public class Admin extends AppUser {
+public class Supervisor extends AppUser {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4927941512834047744L;
 
-	public Admin(String password, String name, String email, String phone, LocalDate dob) {
-		super(password, name, email, phone, ApplicationUserRole.ADMIN, dob);
+	public Supervisor(String password, String name, String email, String phone, LocalDate dob) {
+		super(password, name, email, phone, ApplicationUserRole.SUPERVISOR, dob);
 	}
 
-	public Admin(AppUser user) {
+	public Supervisor(AppUser user) {
 		super(
 			user.getPassword(),
 			user.getName(),
@@ -33,5 +33,4 @@ public class Admin extends AppUser {
 			user.getDob()
 		);
 	}
-
 }

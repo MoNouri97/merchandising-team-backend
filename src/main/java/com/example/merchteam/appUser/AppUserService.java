@@ -1,4 +1,4 @@
-package com.example.merchteam.service;
+package com.example.merchteam.appUser;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -6,8 +6,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import com.example.merchteam.model.AppUser;
-import com.example.merchteam.repository.AppUserRepository;
+import com.example.merchteam.appUser.repository.AppUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

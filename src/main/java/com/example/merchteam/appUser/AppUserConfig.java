@@ -1,11 +1,8 @@
-package com.example.merchteam.config;
+package com.example.merchteam.appUser;
 
 import java.time.LocalDate;
 
-import com.example.merchteam.model.Admin;
-import com.example.merchteam.model.Merchandiser;
-import com.example.merchteam.model.Supervisor;
-import com.example.merchteam.repository.AppUserRepository;
+import com.example.merchteam.appUser.repository.AppUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

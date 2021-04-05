@@ -1,7 +1,7 @@
 package com.example.merchteam.security;
 
-import com.example.merchteam.model.AppUser;
-import com.example.merchteam.service.AppUserService;
+import com.example.merchteam.appUser.AppUser;
+import com.example.merchteam.appUser.AppUserService;
 import com.example.merchteam.util.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;

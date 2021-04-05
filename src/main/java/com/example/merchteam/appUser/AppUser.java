@@ -1,4 +1,4 @@
-package com.example.merchteam.model;
+package com.example.merchteam.appUser;
 
 import java.time.LocalDate;
 import java.util.Collection;
