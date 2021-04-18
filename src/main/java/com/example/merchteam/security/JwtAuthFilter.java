@@ -8,11 +8,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.merchteam.appUser.AppUser;
 import com.example.merchteam.model.AuthRequest;
 import com.example.merchteam.model.AuthResponse;
 import com.example.merchteam.util.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -68,8 +70,12 @@ public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
 			Map.of("authorities", authResult.getAuthorities())
 		);
 		response.addHeader(jwtUtil.getAuthorizationHeader(), authHeader);
-		AuthResponse authResponse = new AuthResponse(authHeader, authResult.getName());
-		new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT)
-			.writeValue(response.getWriter(), authResponse);
+		AuthResponse authResponse = new AuthResponse(authHeader, (AppUser) authResult.getPrincipal());
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(SerializationFeature.INDENT_OUTPUT);
+		// to display dates correctly (dd/MM/yyyy)
+		mapper.registerModule(new JavaTimeModule());
+
+		mapper.writeValue(response.getWriter(), authResponse);
 	}
 }
