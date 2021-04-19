@@ -1,4 +1,4 @@
-package com.example.Merchandising.article;
+package com.example.merchteam.article;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

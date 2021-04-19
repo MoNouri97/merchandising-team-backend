@@ -1,4 +1,4 @@
-package com.example.Merchandising.categorie;
+package com.example.merchteam.categorie;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

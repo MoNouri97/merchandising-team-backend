@@ -1,4 +1,4 @@
-package com.example.Merchandising.gms;
+package com.example.merchteam.gms;
 
 import java.util.List;
 import java.util.Objects;
@@ -6,7 +6,6 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.Merchandising.categorie.CategorieRepository;
 @Service
 public class GMSService {
 	private final GMSRepository gmsRepository;

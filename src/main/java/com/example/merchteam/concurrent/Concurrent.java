@@ -1,4 +1,4 @@
-package com.example.Merchandising.concurrent;
+package com.example.merchteam.concurrent;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

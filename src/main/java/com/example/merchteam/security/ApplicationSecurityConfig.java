@@ -31,15 +31,15 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf()
 			.disable()
 			.sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			.and()
-			.addFilter(new JwtAuthFilter(authenticationManager(), jwtUtil))
-			.addFilterAfter(new JwtValidateFilter(jwtUtil), JwtAuthFilter.class)
-			.authorizeRequests()
-			.antMatchers("/", "/login", "/css/*", "/js/*")
-			.permitAll() // anyone can access
-			.anyRequest()
-			.authenticated();
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//			.and()
+//			.addFilter(new JwtAuthFilter(authenticationManager(), jwtUtil))
+//			.addFilterAfter(new JwtValidateFilter(jwtUtil), JwtAuthFilter.class)
+//			.authorizeRequests()
+//			.antMatchers("/", "/login", "/css/*", "/js/*")
+//			.permitAll() // anyone can access
+//			.anyRequest()
+//			.authenticated();
 	}
 
 	@Override

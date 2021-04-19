@@ -1,4 +1,4 @@
-package com.example.Merchandising.article;
+package com.example.merchteam.article;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

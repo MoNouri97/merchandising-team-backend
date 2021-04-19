@@ -1,4 +1,4 @@
-package com.example.Merchandising.gms;
+package com.example.merchteam.gms;
 
 import java.util.List;
 

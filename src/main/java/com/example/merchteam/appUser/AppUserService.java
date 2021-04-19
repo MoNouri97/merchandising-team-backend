@@ -34,7 +34,7 @@ public class AppUserService<T extends AppUser> implements UserDetailsService {
 		if (AppUserOptional.isPresent()) {
 			throw new IllegalStateException("email already taken");
 		}
-		appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+		//appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
 		return userRepository.save(appUser);
 	}
 
