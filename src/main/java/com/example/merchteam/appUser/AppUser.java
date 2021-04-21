@@ -43,7 +43,7 @@ public class AppUser implements UserDetails {
 	private String phone;
 	@Enumerated(EnumType.STRING)
 	private ApplicationUserRole role;
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dob;
 
 	public AppUser(
