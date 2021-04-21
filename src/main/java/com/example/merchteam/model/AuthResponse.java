@@ -1,6 +1,6 @@
 package com.example.merchteam.model;
 
-import java.util.Date;
+import com.example.merchteam.appUser.AppUser;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,13 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthResponse {
 	private String token;
-	private String userName;
-	private Date timestamp;
+	private AppUser user;
 
-	public AuthResponse(String token, String userName) {
+	public AuthResponse(String token, AppUser user) {
 		this.token = token;
-		this.userName = userName;
-		this.timestamp = new Date();
+		this.user = user;
 	}
 
 }

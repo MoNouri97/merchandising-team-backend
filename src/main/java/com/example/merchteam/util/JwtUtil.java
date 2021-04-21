@@ -53,7 +53,10 @@ public class JwtUtil {
 
 	public Claims extractClaims(String token) {
 		// parse token
-		Jws<Claims> parsedClaimsJws = Jwts.parserBuilder().setSigningKey(getJwtSecret()).build().parseClaimsJws(token);
+		Jws<Claims> parsedClaimsJws = Jwts.parserBuilder()
+			.setSigningKey(getJwtSecret())
+			.build()
+			.parseClaimsJws(token);
 		return parsedClaimsJws.getBody();
 	}
 
@@ -88,10 +91,9 @@ public class JwtUtil {
 				var casted = (Map<?, ?>) auth;
 				return new SimpleGrantedAuthority(((String) casted.get("authority")));
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return null;
 			}
-			return null;
 		}).collect(Collectors.toSet());
 	}
 
