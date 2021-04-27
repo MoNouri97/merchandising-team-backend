@@ -3,15 +3,20 @@ package com.example.merchteam.gms;
 import java.util.List;
 import java.util.Objects;
 
+import com.example.merchteam.article.Article;
+import com.example.merchteam.article.ArticleRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GMSService {
 	private final GMSRepository gmsRepository;
+	private final ArticleRepository articleRepository;
 	@Autowired
-	public GMSService(GMSRepository gmsRepository) {
+	public GMSService(GMSRepository gmsRepository, ArticleRepository articleRepository) {
 		this.gmsRepository = gmsRepository;
+		this.articleRepository = articleRepository;
 	}
 	public List<GMS> getGMS() {
 		return gmsRepository.findAll();
@@ -58,6 +63,14 @@ public class GMSService {
 	public void addGMS(GMS gms) {
 		gmsRepository.save(gms);
 		
+	}
+
+	public GMS addProductsToGms(Long id, Long[] products) {
+		GMS gms = gmsRepository.findById(id).orElseThrow();
+		List<Article> articles = articleRepository.findAllById(List.of(products));
+		gms.getArticles().addAll(articles);
+		return gmsRepository.save(gms);
+		// return gms;
 	}
 
 }

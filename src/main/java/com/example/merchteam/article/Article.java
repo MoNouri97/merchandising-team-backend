@@ -1,15 +1,18 @@
 package com.example.merchteam.article;
 
-import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.example.merchteam.gms.GMS;
 @Entity
 @Table
 public class Article {
@@ -31,6 +34,10 @@ private String categorie;
 private String codeProduit;
 private String prix;
 private String poid;
+
+@ManyToMany(mappedBy = "articles", fetch = FetchType.LAZY)
+private Set<GMS> gmsList = new HashSet<>();
+
 public Article() {
 }
 public Article(Long id, String designation, String reference, String type, String codeProduit,
