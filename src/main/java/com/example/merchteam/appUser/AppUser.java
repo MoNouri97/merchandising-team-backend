@@ -2,6 +2,8 @@ package com.example.merchteam.appUser;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,7 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import com.example.merchteam.planning.Task;
 import com.example.merchteam.security.ApplicationUserRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
