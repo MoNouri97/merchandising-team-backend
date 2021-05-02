@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*" /* "http://localhost:3000" */)
-@RequestMapping(path = "api/v1/categorys")
+@RequestMapping(path = "api/v1/category")
 public class CategoryController {
 	private final CategoryService categoryService;
 
@@ -25,8 +25,8 @@ public class CategoryController {
 	}
 
 	@GetMapping
-	public List<Category> getCategory() {
-		return categoryService.getCategory();
+	public List<Category> getAllCategories() {
+		return categoryService.getAll();
 	}
 
 	@GetMapping(path = "{categoryId}")
