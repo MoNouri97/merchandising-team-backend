@@ -1,23 +1,28 @@
 package com.example.merchteam.gms;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.example.merchteam.article.Article;
+import com.example.merchteam.planning.Task;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table
-public class GMS {
+@Table(name = "gms")
+public class GMS implements Serializable {
 	@Id
 	@SequenceGenerator(
 			name="gms_sequence",
@@ -28,6 +33,7 @@ public class GMS {
 			strategy =GenerationType.SEQUENCE,
 			generator="gms_sequence"
 	)
+	@Column(name = "id")
 private Long id;
 private String name;
 private String image;
@@ -38,6 +44,11 @@ private double latitude;
 @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 private Set<Article> articles = new HashSet<>();
 
+@OneToOne(fetch = FetchType.LAZY,
+cascade =  CascadeType.ALL,
+mappedBy = "gms")
+@JsonIgnoreProperties("gms")
+private Task task;
 public GMS() {
 	super();
 }
@@ -103,5 +114,12 @@ public double getLatitude() {
 public void setLatitude(double latitude) {
 	this.latitude = latitude;
 }
+public Task getTask() {
+	return task;
+}
+public void setTask(Task task) {
+	this.task = task;
+}
+
 
 }
