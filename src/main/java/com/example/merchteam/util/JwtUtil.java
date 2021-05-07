@@ -109,8 +109,8 @@ public class JwtUtil {
 	public String generateToken(String username, Map<String, Object> claims) {
 		// build token
 		return Jwts.builder()
-			.setSubject(username)
 			.setClaims(claims)
+			.setSubject(username)
 			.setIssuedAt(new java.util.Date())
 			.setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(tokenExpirationDays)))
 			.signWith(getJwtSecret())

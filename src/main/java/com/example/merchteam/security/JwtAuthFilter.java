@@ -65,12 +65,13 @@ public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
 	) throws IOException,
 		ServletException {
 
+		AppUser principal = (AppUser) authResult.getPrincipal();
 		String authHeader = jwtUtil.generateAuthHeaderValue(
-			authResult.getName(),
+			principal.getEmail(),
 			Map.of("authorities", authResult.getAuthorities())
 		);
 		response.addHeader(jwtUtil.getAuthorizationHeader(), authHeader);
-		AuthResponse authResponse = new AuthResponse(authHeader, (AppUser) authResult.getPrincipal());
+		AuthResponse authResponse = new AuthResponse(authHeader, principal);
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		// to display dates correctly (dd/MM/yyyy)
