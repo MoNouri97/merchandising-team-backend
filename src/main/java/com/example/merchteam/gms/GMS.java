@@ -36,11 +36,11 @@ private int estimatedTime;
 private double longitude;
 private double latitude;
 
-@OneToOne(fetch = FetchType.LAZY,
+/*@OneToOne(fetch = FetchType.LAZY,
 cascade =  CascadeType.ALL,
 mappedBy = "gms")
 @JsonIgnoreProperties("gms")
-private Task task;
+private Task task;*/
 public GMS() {
 	super();
 }
@@ -97,12 +97,12 @@ public double getLatitude() {
 public void setLatitude(double latitude) {
 	this.latitude = latitude;
 }
-public Task getTask() {
+/*public Task getTask() {
 	return task;
 }
 public void setTask(Task task) {
 	this.task = task;
 }
-
+*/
 
 }
