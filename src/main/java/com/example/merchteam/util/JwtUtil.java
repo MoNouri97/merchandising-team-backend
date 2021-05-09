@@ -21,6 +21,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -65,16 +66,25 @@ public class JwtUtil {
 		return claims.getSubject();
 	}
 
-	public String extractUsername(Claims claims) {
-		return claims.getSubject();
+	public JwtUserInfo extractUserInfo(Claims claims) {
+		JwtUserInfo u = new JwtUserInfo();
+		u.id = Long.valueOf((int) extract(claims, "user"));
+		u.username = claims.getSubject();
+		return u;
 	}
 
-	public Object extractClaim(Claims claims, String claim) {
+	@Data
+	public class JwtUserInfo {
+		private String username;
+		private Long id;
+	}
+
+	public Object extract(Claims claims, String claim) {
 		return claims.get(claim);
 	}
 
 	public Set<SimpleGrantedAuthority> extractAuthorities(Claims claims) throws Exception {
-		Object extractedAuthorities = extractClaim(claims, "authorities");
+		Object extractedAuthorities = extract(claims, "authorities");
 		if (extractedAuthorities == null) {
 			return null;
 		}
@@ -103,7 +113,9 @@ public class JwtUtil {
 
 	public Boolean validateToken(String token, UserDetails userDetails) {
 		Claims claims = extractClaims(token);
-		return (extractUsername(claims).equals(userDetails.getUsername()) && !IsTokenExpired(claims));
+		return (extractUserInfo(claims).username.equals(userDetails.getUsername()) && !IsTokenExpired(
+			claims
+		));
 	}
 
 	public String generateToken(String username, Map<String, Object> claims) {

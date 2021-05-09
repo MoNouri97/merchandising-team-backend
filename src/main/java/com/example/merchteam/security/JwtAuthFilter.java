@@ -64,11 +64,10 @@ public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
 		Authentication authResult
 	) throws IOException,
 		ServletException {
-
 		AppUser principal = (AppUser) authResult.getPrincipal();
 		String authHeader = jwtUtil.generateAuthHeaderValue(
 			principal.getEmail(),
-			Map.of("authorities", authResult.getAuthorities())
+			Map.of("authorities", authResult.getAuthorities(), "user", principal.getId())
 		);
 		response.addHeader(jwtUtil.getAuthorizationHeader(), authHeader);
 		AuthResponse authResponse = new AuthResponse(authHeader, principal);

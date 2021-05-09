@@ -43,18 +43,19 @@ public class JwtValidateFilter extends OncePerRequestFilter {
 		try {
 			// parse token
 			Claims claims = jwtUtil.extractClaims(jwt);
-			// username
-			String username = jwtUtil.extractUsername(claims);
+			// user
+			var user = jwtUtil.extractUserInfo(claims);
 			// authorities List must be mapped tp Set
 			Set<SimpleGrantedAuthority> authorities = jwtUtil.extractAuthorities(claims);
 			// authenticate user
 			Authentication authentication = new UsernamePasswordAuthenticationToken(
-				username,
+				user,
 				null,
 				authorities
 			);
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 		} catch (Exception e) {
+			// System.out.println(e);
 			throw new IllegalStateException("token cannot be trusted !!!");
 		}
 
