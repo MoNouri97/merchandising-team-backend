@@ -13,7 +13,10 @@ public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> 
 
 	Page<ChatMessage> findBySenderId(Long senderId, Pageable pageable);
 
-	Page<ChatMessage> findByReceiverEmail(String receiverEmail, Pageable pageable);
+	@Query(
+		value = "SELECT m FROM ChatMessage m WHERE m.sender.id = ?1 OR m.receiver.id = ?1 ORDER BY m.id"
+	)
+	Page<ChatMessage> findByUser(Long userId, Pageable pageable);
 
 	@Query(
 		value = "SELECT m FROM ChatMessage m WHERE m.sender.id IN ?1 AND m.receiver.id IN ?1 ORDER BY m.id"

@@ -8,6 +8,7 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
 // import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +32,10 @@ public class ChatController {
 	@SendTo("/topic/messages/{to}")
 	public ChatMessage sendMessage(
 		@DestinationVariable Long to,
-		@Payload ChatMessagePayload chatMessage
+		@Payload ChatMessagePayload chatMessage,
+		StompHeaderAccessor accessor
 	) {
-		System.out.println("chatMessage: " + chatMessage);
-		System.out.println("to: " + to);
+		// System.out.println("********** user: " + accessor.getUser());
 		return chatService.addChatMessage(chatMessage, to);
 	}
 
