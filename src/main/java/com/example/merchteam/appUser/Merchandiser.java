@@ -30,6 +30,7 @@ public class Merchandiser extends AppUser {
 	@JsonIgnoreProperties("merchandiser")
 	private List<Task> tasks=new ArrayList<>();
 
+
 	public Merchandiser(String password, String name, String email, String phone, LocalDate dob) {
 		super(password, name, email, phone, ApplicationUserRole.MERCHANDISER, dob);
 	}

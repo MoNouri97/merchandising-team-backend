@@ -1,6 +1,7 @@
 package com.example.merchteam.planning;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -41,15 +42,21 @@ public class Task implements Serializable {
 			generator="task_sequence"
 	)
 private Long id;
+@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+private LocalDateTime endDate;//end is actually a reserved word in postgres sql 
 private String name;
-@JsonFormat(pattern = "dd-MM-yyyy")
-private LocalDate date;
+@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+private LocalDateTime start;
+
 private int duration;
 @OneToOne(
-cascade =  CascadeType.ALL/*,
-optional = false*/)
+cascade =  CascadeType.ALL,
+optional = false)
 @JoinColumn(name = "gms_id"/*, nullable = false*/)
 private GMS gms;
+/*@ManyToOne(fetch=FetchType.LAZY)
+@JoinColumn(name="merchandiserID")
+private Merchandiser merchandiser;*/
 
 /*@ManyToOne
 @JoinColumn(name="merchandiser_id", nullable=false)
@@ -57,17 +64,19 @@ private Merchandiser merchandiser;*/
 public Task() {
 	super();
 }
-public Task(String name, LocalDate date, int duration) {
+public Task(String name, LocalDateTime start,LocalDateTime endDate, int duration) {
 	super();
 	this.name = name;
-	this.date = date;
+	this.start = start;
+	this.endDate=endDate;
 	this.duration = duration;
 }
-public Task(Long id, String name, LocalDate date, int duration) {
+public Task(Long id, String name, LocalDateTime start,LocalDateTime endDate, int duration) {
 	super();
 	this.id = id;
 	this.name = name;
-	this.date = date;
+	this.start = start;
+	this.endDate=endDate;
 	this.duration = duration;
 }
 public Long getId() {
@@ -82,11 +91,17 @@ public String getName() {
 public void setName(String name) {
 	this.name = name;
 }
-public LocalDate getDate() {
-	return date;
+public LocalDateTime getStart() {
+	return start;
 }
-public void setDate(LocalDate date) {
-	this.date = date;
+public void setStart(LocalDateTime date) {
+	this.start = date;
+}
+public LocalDateTime getEndDate() {
+	return endDate;
+}
+public void setEndDate(LocalDateTime endDate) {
+	this.endDate = endDate;
 }
 public int getDuration() {
 	return duration;
