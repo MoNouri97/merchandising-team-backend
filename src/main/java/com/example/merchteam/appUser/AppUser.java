@@ -2,8 +2,8 @@ package com.example.merchteam.appUser;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,9 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-import com.example.merchteam.planning.Task;
+import com.example.merchteam.chat.ChatMessage;
 import com.example.merchteam.security.ApplicationUserRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -50,6 +49,13 @@ public class AppUser implements UserDetails {
 	private ApplicationUserRole role;
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dob;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "sender")
+	private Set<ChatMessage> sentChat = new HashSet<>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "receiver")
+	private Set<ChatMessage> receivedChat = new HashSet<>();
 
 	public AppUser(
 		String password,
