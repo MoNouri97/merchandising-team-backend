@@ -1,11 +1,9 @@
 package com.example.merchteam.gms;
 
 import java.util.List;
-
-import com.example.merchteam.gms.model.AddProductsRequest;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "*" )
 @RequestMapping(path = "/api/v1/gms")
 public class GMSController {
 	private final GMSService gmsService;
@@ -26,10 +23,9 @@ public class GMSController {
 		this.gmsService = gmsService;
 	}
 
-	@PostMapping(path = "/add-products")
-	public GMS addProducts(@RequestBody AddProductsRequest body) {
-		System.out.println(body);
-		return gmsService.addProductsToGms(body.getGms(), body.getProducts());
+	@PostMapping(path = "/{id}/products")
+	public GMS addProducts(@PathVariable("id") Long id, @RequestBody Map<String, Long[]> body) {
+		return gmsService.addProductsToGms(id, body.get("articles"));
 	}
 
 	// CRUD
