@@ -35,8 +35,8 @@ public class ChatService {
 		return saved;
 	}
 
-	public Slice<ChatMessage> getLatestMessages(int count, int offset) {
-		checkCountOffset(count, offset);
+	public Slice<ChatMessage> getLatestMessages(int count, int page) {
+		checkCountPage(count, page);
 		JwtUserInfo userInfo = (JwtUserInfo) SecurityContextHolder.getContext()
 			.getAuthentication()
 			.getPrincipal();
@@ -47,23 +47,22 @@ public class ChatService {
 		// .getPrincipal()).getUsername() : "merch@spring.co";
 
 		// create pagination
-		Pageable pageable = PageRequest.of(offset, count);
+		Pageable pageable = PageRequest.of(page, count);
 		// get a page and return a slice (page also includes the nbr of pages -> slower)
 		Page<ChatMessage> messages = chatMessageRepository.findByUser(userInfo.getId(), pageable);
-		System.out.println("********** DB: " + userInfo.getId());
 
 		return messages;
 
 	}
 
 
-	public Slice<ChatMessage> getLatestWithId(int count, int offset, Long fromId) {
-		checkCountOffset(count, offset);
+	public Slice<ChatMessage> getLatestWithId(int count, int page, Long fromId) {
+		checkCountPage(count, page);
 		JwtUserInfo userInfo = (JwtUserInfo) SecurityContextHolder.getContext()
 			.getAuthentication()
 			.getPrincipal();
 
-		Pageable pageable = PageRequest.of(offset, count);
+		Pageable pageable = PageRequest.of(page, count);
 		Page<ChatMessage> messages = chatMessageRepository.findConversation(
 			List.of(fromId, userInfo.getId()),
 			pageable
@@ -71,12 +70,12 @@ public class ChatService {
 		return messages;
 	}
 
-	private void checkCountOffset(int count, int offset) {
+	private void checkCountPage(int count, int page) {
 		if (count <= 0) {
 			throw new IllegalStateException("count must be greater than 0");
 		}
-		if (offset < 0) {
-			throw new IllegalStateException("offset must be greater than or equal to 0");
+		if (page < 0) {
+			throw new IllegalStateException("page must be greater than or equal to 0");
 		}
 	}
 }
