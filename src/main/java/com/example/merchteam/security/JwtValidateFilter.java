@@ -17,7 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.Claims;
-
+//this is the request filter to make sure the header contains the jwt token
 public class JwtValidateFilter extends OncePerRequestFilter {
 	private final JwtUtil jwtUtil;
 

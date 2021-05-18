@@ -25,6 +25,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		this.jwtUtil = jwtUtil;
 	}
 
+	//this is for authorisation
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
@@ -33,20 +34,25 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 			.cors()
 			.and()
 			.sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)//tell spring security to use the filter 
+			
 			.and()
 			.addFilter(new JwtAuthFilter(authenticationManager(), jwtUtil))
 			.addFilterAfter(new JwtValidateFilter(jwtUtil), JwtAuthFilter.class)
+			
 			.authorizeRequests()
 			.antMatchers("/", "/login", "/css/*", "/js/*", "/chat/**")
-			.permitAll() // anyone can access
+			.permitAll() // anyone can access those urls
+			
 			.anyRequest()
 			.authenticated();
 	}
 
+	//this is for authentification
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService);
+		
 	}
 
 }

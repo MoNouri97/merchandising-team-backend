@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "*" /* "http://localhost:3000" */)
+@CrossOrigin(origins = "*" /*"http://localhost:3000"*/)
 @RequestMapping(path = "api/v1/category")
 public class CategoryController {
 	private final CategoryService categoryService;
