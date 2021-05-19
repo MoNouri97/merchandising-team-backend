@@ -49,18 +49,20 @@ private String name;
 private LocalDateTime start;
 
 private int duration;
-@OneToOne(
-cascade =  CascadeType.ALL,
-optional = false)
-@JoinColumn(name = "gms_id"/*, nullable = false*/)
+
+//cascade =  CascadeType.ALL,
+//optional = false
+		
+//@JoinColumn(name = "gms_id"/*, nullable = false*/)
+@OneToOne
 private GMS gms;
 /*@ManyToOne(fetch=FetchType.LAZY)
 @JoinColumn(name="merchandiserID")
 private Merchandiser merchandiser;*/
 
-/*@ManyToOne
-@JoinColumn(name="merchandiser_id", nullable=false)
-private Merchandiser merchandiser;*/
+@ManyToOne
+@JoinColumn(name="merchandiser_id"/*, nullable=false*/)
+private Merchandiser merchandiser;
 public Task() {
 	super();
 }

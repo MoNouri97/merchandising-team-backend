@@ -38,6 +38,7 @@ public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
 		HttpServletRequest request,
 		HttpServletResponse response
 	) throws AuthenticationException {
+		
 		try {
 			// map the request to UsernamePasswordAuthRequest.class
 			AuthRequest reqValue = new ObjectMapper().readValue(
@@ -77,5 +78,10 @@ public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
 		mapper.registerModule(new JavaTimeModule());
 
 		mapper.writeValue(response.getWriter(), authResponse);
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,authorization");
+		response.addHeader("Access-Control-Expose-Headers", "Access-Control-Allow-Origin, Access-Control-Allow-Credentials, authorization");
+		response.addHeader("Access-Control-Expose-Methods", "POST,GET,PUT,DELETE,PATCH");
+		response.addHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE,PATCH");
 	}
 }

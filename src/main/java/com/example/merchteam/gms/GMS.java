@@ -12,10 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.example.merchteam.article.Article;
+import com.example.merchteam.planning.Task;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "gms")
@@ -41,11 +44,11 @@ private double latitude;
 @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 private Set<Article> articles = new HashSet<>();
 
-/*@OneToOne(fetch = FetchType.LAZY,
+@OneToOne(fetch = FetchType.LAZY,
 cascade =  CascadeType.ALL,
 mappedBy = "gms")
-@JsonIgnoreProperties("gms")
-private Task task;*/
+@JsonIgnore
+private Task task;
 public GMS() {
 	super();
 }

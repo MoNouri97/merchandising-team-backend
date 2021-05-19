@@ -31,8 +31,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.csrf()
 			.disable()
-			.cors()
-			.and()
+			.cors();
+			/*.and()
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)//tell spring security to use the filter 
 			
@@ -45,7 +45,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 			.permitAll() // anyone can access those urls
 			
 			.anyRequest()
-			.authenticated();
+			.authenticated();*/
 	}
 
 	//this is for authentification

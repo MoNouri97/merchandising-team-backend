@@ -23,10 +23,6 @@ public class TaskController {
 	public TaskController(TaskService taskService) {
 		this.taskService = taskService;
 	}
-	@GetMapping("/hello")
-	public String greet() {
-		return "hi";
-	}
 	@GetMapping
 	public List<Task> getTasks() {
 		return  taskService.getTasks();
