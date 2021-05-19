@@ -47,18 +47,12 @@ public class CompetitorService {
 			) {
 				competitor.setName(crt.getName());
 			}
-			if (
-				crt.getCategory() != null && crt.getCategory().length() > 0
-					&& !Objects.equals(competitor.getCategory(), crt.getCategory())
-			) {
-				competitor.setCategory(crt.getCategory());
-			}
-			if (
-				crt.getGms() != null && crt.getGms().length() > 0
-					&& !Objects.equals(competitor.getGms(), crt.getGms())
-			) {
+			 
+				competitor.setCategories(crt.getCategories());
+			
+			 
 				competitor.setGms(crt.getGms());
-			}
+			
 			return competitorRepository.save(competitor);
 		})
 			.orElseThrow(

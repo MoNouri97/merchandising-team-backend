@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.example.merchteam.category.Category;
 import com.example.merchteam.gms.GMS;
 @Entity
 @Table
@@ -37,6 +39,9 @@ private String poid;
 
 @ManyToMany(mappedBy = "articles", fetch = FetchType.LAZY)
 private Set<GMS> gmsList = new HashSet<>();
+
+@ManyToOne
+private Category category;
 
 public Article() {
 }
