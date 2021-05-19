@@ -7,14 +7,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ReclamationService {
-	private final ReclamationRepository reclamationRepository;
+	private final ReclamationRepository repository;
 
 	@Autowired
 	public ReclamationService(ReclamationRepository reclamationRepository) {
-		this.reclamationRepository = reclamationRepository;
+		this.repository = reclamationRepository;
 	}
 	public List<Reclamation> getAllReclamations() {
-		return reclamationRepository.findAll();
+		return repository.findAll();
+	}
+
+	public Reclamation getById(Long id) {
+		return repository.findById(id)
+			.orElseThrow(() -> new IllegalStateException("Reclamation with id" + id + "does not exist"));
+	}
+
+	public Reclamation add(Reclamation body) {
+		return repository.save(body);
+	}
+
+	public void delete(Long id) {
+		repository.deleteById(id);
 	}
 
 }
