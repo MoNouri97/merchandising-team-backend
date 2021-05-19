@@ -24,11 +24,11 @@ import lombok.NoArgsConstructor;
 public class LeaveRequest {
 	@Id
 	@SequenceGenerator(
-		name = "claimtype_sequence",
-		sequenceName = "claimtype_sequence",
+		name = "leave_sequence",
+		sequenceName = "leave_sequence",
 		allocationSize = 1
 	)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "claimtype_sequence")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "leave_sequence")
 	private Long id;
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate startDate;
