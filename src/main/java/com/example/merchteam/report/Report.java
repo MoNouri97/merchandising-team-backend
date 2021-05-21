@@ -1,12 +1,16 @@
 package com.example.merchteam.report;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import com.example.merchteam.report.event.model.Event;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,4 +28,7 @@ public class Report {
 	private Boolean valid;
 	private Double longitude;
 	private Double latitude;
+
+	@OneToMany(mappedBy = "report")
+	private Set<Event> events;
 }

@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.example.merchteam.article.Article;
+import com.example.merchteam.report.Report;
 import com.example.merchteam.report.event.EventType;
 
 import lombok.Data;
@@ -34,10 +35,6 @@ public class Event {
 
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Article product;
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	private Report report;
 }
-/**
- * Array [ Object { "data": Object { "after": undefined, "before": undefined,
- * "category": "", "product": "", }, "type": "BeforeAfter", }, Object { "data":
- * Object { "category": "", "image": undefined, "product": "", "title": "", },
- * "type": "Action", }, ]
- */
