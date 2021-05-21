@@ -1,32 +1,25 @@
-package com.example.merchteam.report.event;
+package com.example.merchteam.report.event.model;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.Data;
 
 @Entity
 @Data
-public class Promotion extends Event {
+public class Action extends Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@JsonFormat(pattern = "dd-MM-yyyy")
-	private LocalDate startDate;
-	@JsonFormat(pattern = "dd-MM-yyyy")
-	private LocalDate endDate;
+	private String Title;
 
-	private Double oldPrice;
-	private Double newPrice;
-
+	@ElementCollection
 	private Set<String> images = new HashSet<>();
 }

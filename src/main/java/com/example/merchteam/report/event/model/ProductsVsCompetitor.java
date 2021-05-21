@@ -1,4 +1,4 @@
-package com.example.merchteam.report.event;
+package com.example.merchteam.report.event.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

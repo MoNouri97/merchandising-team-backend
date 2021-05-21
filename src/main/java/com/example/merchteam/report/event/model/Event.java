@@ -1,16 +1,20 @@
-package com.example.merchteam.report.event;
+package com.example.merchteam.report.event.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.example.merchteam.article.Article;
+import com.example.merchteam.report.event.EventType;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,5 +32,12 @@ public class Event {
 	@Enumerated(EnumType.STRING)
 	private EventType type;
 
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Article product;
 }
+/**
+ * Array [ Object { "data": Object { "after": undefined, "before": undefined,
+ * "category": "", "product": "", }, "type": "BeforeAfter", }, Object { "data":
+ * Object { "category": "", "image": undefined, "product": "", "title": "", },
+ * "type": "Action", }, ]
+ */
