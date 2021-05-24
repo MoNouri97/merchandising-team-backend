@@ -1,8 +1,10 @@
 package com.example.merchteam.report;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +31,20 @@ public class Report {
 	private Double longitude;
 	private Double latitude;
 
-	@OneToMany(mappedBy = "report")
-	private Set<Event> events;
+	@OneToMany(mappedBy = "report", cascade = CascadeType.ALL)
+	private Set<Event> events = new HashSet<>();
+
+	public Report(
+		LocalDateTime dateTime,
+		Boolean valid,
+		Double longitude,
+		Double latitude,
+		Set<Event> events
+	) {
+		this.dateTime = dateTime;
+		this.valid = valid;
+		this.longitude = longitude;
+		this.latitude = latitude;
+		this.events = events;
+	}
 }

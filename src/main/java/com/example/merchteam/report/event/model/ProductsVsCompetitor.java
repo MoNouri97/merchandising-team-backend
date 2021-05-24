@@ -2,23 +2,19 @@ package com.example.merchteam.report.event.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.example.merchteam.competitor.Competitor;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@NoArgsConstructor
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class ProductsVsCompetitor extends Event {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Competitor competitor;

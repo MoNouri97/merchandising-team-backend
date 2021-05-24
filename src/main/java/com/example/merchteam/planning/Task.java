@@ -1,29 +1,18 @@
 package com.example.merchteam.planning;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import com.example.merchteam.appUser.AppUser;
-import com.example.merchteam.appUser.Merchandiser;
 import com.example.merchteam.gms.GMS;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table
 public class Task implements Serializable {
@@ -60,9 +49,9 @@ private GMS gms;
 @JoinColumn(name="merchandiserID")
 private Merchandiser merchandiser;*/
 
-@ManyToOne
-@JoinColumn(name="merchandiser_id"/*, nullable=false*/)
-private Merchandiser merchandiser;
+// @ManyToOne
+// @JoinColumn(name="merchandiser_id"/*, nullable=false*/)
+// private Merchandiser merchandiser;
 public Task() {
 	super();
 }
@@ -73,7 +62,8 @@ public Task(String name, LocalDateTime start,LocalDateTime endDate, int duration
 	this.endDate=endDate;
 	this.duration = duration;
 }
-public Task(Long id, String name, LocalDateTime start,LocalDateTime endDate, int duration) {
+
+public Task(Long id, String name, LocalDateTime start, LocalDateTime endDate, int duration) {
 	super();
 	this.id = id;
 	this.name = name;

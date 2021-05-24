@@ -1,16 +1,12 @@
 package com.example.merchteam.report;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import com.example.merchteam.report.event.EventRepository;
-import com.example.merchteam.report.event.model.Action;
-import com.example.merchteam.report.event.model.BeforeAfter;
-import com.example.merchteam.report.event.model.CompetitorEvent;
-import com.example.merchteam.report.event.model.NewProduct;
-import com.example.merchteam.report.event.model.PriceChange;
-import com.example.merchteam.report.event.model.ProductsVsCompetitor;
-import com.example.merchteam.report.event.model.Promotion;
-import com.example.merchteam.report.event.model.Rupture;
+import com.example.merchteam.report.event.model.Event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,31 +14,27 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReportService {
 	@Autowired
-	private EventRepository<Action> actionRepo;
+	private EventRepository<Event> eventRepository;
 	@Autowired
-	private EventRepository<BeforeAfter> BeforeAfterRepo;
-	@Autowired
-	private EventRepository<CompetitorEvent> CompetitorEventRepo;
-	@Autowired
-	private EventRepository<NewProduct> NewProductRepo;
-	@Autowired
-	private EventRepository<PriceChange> PriceChangeRepo;
-	@Autowired
-	private EventRepository<ProductsVsCompetitor> ProductsVsCompetitorRepo;
-	@Autowired
-	private EventRepository<Promotion> PromotionRepo;
-	@Autowired
-	private EventRepository<Rupture> RuptureRepo;
+	private ReportRepository reportRepository;
 
 	public List<Report> getAll() {
-		return null;
+		return reportRepository.findAll();
 	}
 
 	public Report getOne(Long id) {
-		return null;
+		return reportRepository.findById(id)
+			.orElseThrow(() -> new IllegalStateException("report with id" + id + "does not exist"));
 	}
 
+	@Transactional
 	public Report create(Report report) {
-		return null;
+		Report savedReport = reportRepository.save(report);
+		// update event.report_id
+		var idList = report.getEvents().stream().map(e -> e.getId()).collect(Collectors.toList());
+		eventRepository.saveAll(report.getEvents());
+		eventRepository.updateEvents(idList, savedReport.getId());
+
+		return savedReport;
 	}
 }
