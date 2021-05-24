@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import com.example.merchteam.category.Category;
 import com.example.merchteam.gms.GMS;
+import com.example.merchteam.report.event.model.Rupture;
 @Entity
 @Table
 public class Article {
@@ -39,6 +40,9 @@ private String poid;
 
 @ManyToMany(mappedBy = "articles", fetch = FetchType.LAZY)
 private Set<GMS> gmsList = new HashSet<>();
+
+@ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
+private Set<Rupture> ruptures = new HashSet<>();
 
 @ManyToOne
 private Category category;

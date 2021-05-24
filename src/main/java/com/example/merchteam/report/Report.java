@@ -9,9 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.example.merchteam.gms.GMS;
 import com.example.merchteam.report.event.model.Event;
 
 import lombok.Data;
@@ -33,6 +35,9 @@ public class Report {
 
 	@OneToMany(mappedBy = "report", cascade = CascadeType.ALL)
 	private Set<Event> events = new HashSet<>();
+
+	@ManyToOne
+	private GMS gms;
 
 	public Report(
 		LocalDateTime dateTime,

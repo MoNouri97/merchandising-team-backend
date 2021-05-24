@@ -1,6 +1,13 @@
 package com.example.merchteam.report.event.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+
+import com.example.merchteam.article.Article;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,5 +22,6 @@ public class Rupture extends Event {
 	private Boolean purchaseOrder;
 	private String image;
 
-	// FIXME : multi products
+	@ManyToMany(cascade = CascadeType.MERGE)
+	private Set<Article> products = new HashSet<>();
 }

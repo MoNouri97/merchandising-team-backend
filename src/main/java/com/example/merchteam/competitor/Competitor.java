@@ -9,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.example.merchteam.article.Article;
 import com.example.merchteam.category.Category;
 import com.example.merchteam.gms.GMS;
+import com.example.merchteam.report.event.model.CompetitorEvent;
+import com.example.merchteam.report.event.model.ProductsVsCompetitor;
 
 @Entity
 @Table
@@ -43,6 +45,10 @@ public class Competitor {
 	private Set<Category> categories = new HashSet<>();
 	
 	
+	@OneToMany(mappedBy = "competitor")
+	private Set<CompetitorEvent> competitorEvents = new HashSet<>();
+	@OneToMany(mappedBy = "competitor")
+	private Set<ProductsVsCompetitor> vsCompetitors = new HashSet<>();
 
 	public Competitor() {
 		super();
