@@ -28,7 +28,6 @@ public class CompetitorController {
 	public List<Competitor> getCompetitors() {
 		return service.getCompetitors();
 	}
-
 	@GetMapping(path = "{competitorId}")
 	public Competitor getCompetitorParId(@PathVariable("competitorId") Long competitorId) {
 		return service.getCompetitorParId(competitorId);

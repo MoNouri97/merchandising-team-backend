@@ -1,18 +1,21 @@
 package com.example.merchteam.planning;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.example.merchteam.appUser.Merchandiser;
 import com.example.merchteam.gms.GMS;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table
 public class Task implements Serializable {
@@ -31,81 +34,94 @@ public class Task implements Serializable {
 			generator="task_sequence"
 	)
 private Long id;
-@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-private LocalDateTime endDate;//end is actually a reserved word in postgres sql 
-private String name;
-@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-private LocalDateTime start;
+private int day;
+private String state;
 
-private int duration;
-
-//cascade =  CascadeType.ALL,
-//optional = false
-		
-//@JoinColumn(name = "gms_id"/*, nullable = false*/)
-@OneToOne
+@OneToOne(fetch = FetchType.LAZY,
+cascade =  CascadeType.ALL)
 private GMS gms;
-/*@ManyToOne(fetch=FetchType.LAZY)
-@JoinColumn(name="merchandiserID")
-private Merchandiser merchandiser;*/
 
-// @ManyToOne
-// @JoinColumn(name="merchandiser_id"/*, nullable=false*/)
-// private Merchandiser merchandiser;
+
+@ManyToOne
+private Merchandiser merchandiser;
+@JsonIgnore
+@ManyToOne
+private Planning planning;
+
 public Task() {
 	super();
 }
-public Task(String name, LocalDateTime start,LocalDateTime endDate, int duration) {
+
+public Task(int day, String state, GMS gms, Merchandiser merchandiser, Planning planning) {
 	super();
-	this.name = name;
-	this.start = start;
-	this.endDate=endDate;
-	this.duration = duration;
+	this.day = day;
+	this.state = state;
+	this.gms = gms;
+	this.merchandiser = merchandiser;
+	this.planning = planning;
 }
 
-public Task(Long id, String name, LocalDateTime start, LocalDateTime endDate, int duration) {
+public Task(Long id, int day, String state, GMS gms, Merchandiser merchandiser, Planning planning) {
 	super();
 	this.id = id;
-	this.name = name;
-	this.start = start;
-	this.endDate=endDate;
-	this.duration = duration;
+	this.day = day;
+	this.state = state;
+	this.gms = gms;
+	this.merchandiser = merchandiser;
+	this.planning = planning;
 }
+
 public Long getId() {
 	return id;
 }
+
 public void setId(Long id) {
 	this.id = id;
 }
-public String getName() {
-	return name;
+
+public int getDay() {
+	return day;
 }
-public void setName(String name) {
-	this.name = name;
+
+public void setDay(int day) {
+	this.day = day;
 }
-public LocalDateTime getStart() {
-	return start;
+
+public String getState() {
+	return state;
 }
-public void setStart(LocalDateTime date) {
-	this.start = date;
+
+public void setState(String state) {
+	this.state = state;
 }
-public LocalDateTime getEndDate() {
-	return endDate;
-}
-public void setEndDate(LocalDateTime endDate) {
-	this.endDate = endDate;
-}
-public int getDuration() {
-	return duration;
-}
-public void setDuration(int duration) {
-	this.duration = duration;
-}
+
 public GMS getGms() {
 	return gms;
 }
+
 public void setGms(GMS gms) {
 	this.gms = gms;
 }
+
+public Merchandiser getMerchandiser() {
+	return merchandiser;
+}
+
+public void setMerchandiser(Merchandiser merchandiser) {
+	this.merchandiser = merchandiser;
+}
+
+public Planning getPlanning() {
+	return planning;
+}
+
+public void setPlanning(Planning planning) {
+	this.planning = planning;
+}
+
+
+
+
+
 
 }

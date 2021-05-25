@@ -89,9 +89,9 @@ public class ArticleService {
 			if(art.getPoid()!=null && art.getPoid().length() > 0 && !Objects.equals(article.getPoid(),art.getPoid())) {
 				article.setPoid(art.getPoid());
 			}
-			if(art.getCategorie()!=null && art.getCategorie().length() > 0 && !Objects.equals(article.getCategorie(),art.getCategorie())) {
-				article.setCategorie(art.getCategorie());
-			}
+			
+				article.setCategory(art.getCategory());
+			
 			return articleRepository.save(article);
 		}).orElseThrow(()->new IllegalStateException("article with id"+articleId+"does not exist"));
 	}

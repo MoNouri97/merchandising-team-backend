@@ -2,6 +2,7 @@ package com.example.merchteam.appUser;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.example.merchteam.article.Article;
 import com.example.merchteam.planning.Task;
 import com.example.merchteam.security.ApplicationUserRole;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,9 +27,8 @@ public class Merchandiser extends AppUser {
 	 *
 	 */
 	private static final long serialVersionUID = -9031840772715357682L;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name ="tasks",referencedColumnName = "id")
-	@JsonIgnoreProperties("merchandiser")
+	
+	@OneToMany(mappedBy = "merchandiser")
 	private List<Task> tasks=new ArrayList<>();
 
 
