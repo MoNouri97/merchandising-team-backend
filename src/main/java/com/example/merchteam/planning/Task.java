@@ -37,13 +37,13 @@ private Long id;
 private int day;
 private String state;
 
-@OneToOne(fetch = FetchType.LAZY,
+@OneToOne(fetch = FetchType.EAGER,
 cascade =  CascadeType.MERGE)
 private GMS gms;
 
 
 
-//@JsonIgnore
+@JsonIgnore
 @ManyToOne
 private Planning planning;
 

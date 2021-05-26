@@ -46,8 +46,10 @@ private double longitude;
 private double latitude;
 
 @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+@JsonIgnore
 private Set<Article> articles = new HashSet<>();
 @OneToMany(mappedBy = "gms")
+@JsonIgnore
 private Set<Reclamation> reclamations = new HashSet<>();
 @OneToMany(mappedBy = "gms")
 private Set<Report> reports = new HashSet<>();

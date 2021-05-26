@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,10 @@ public PlanningController(PlanningService planningService) {
 @GetMapping
 public List<Planning> getPlanning() {
 	return  planningService.getPlanning();
+}
+@GetMapping(path = "merchandiser/{id}")
+public Planning getPlanningPerMerchandiserId(@PathVariable("id") Long id) {
+	return  planningService.getPlanningPerMerchandiserId(id);
 }
 @PostMapping
 public void addPlanning(@RequestBody Planning planning) {

@@ -27,4 +27,9 @@ public class PlanningService {
 		taskRepository.updateTasks(idList, pl.getId());
 	}
 
+	public Planning getPlanningPerMerchandiserId(Long merchandiserId) {
+		
+		return planningRepository.findPlanningByMerchandiserId(merchandiserId).orElse(null);
+	}
+
 }
