@@ -16,7 +16,7 @@ import com.example.merchteam.competitor.Competitor;
 
 @RestController
 @CrossOrigin(origins = "*" /*"http://localhost:3000"*/)
-@RequestMapping(path = "/api/v1/planning")
+@RequestMapping(path = "/api/v1/task")
 public class TaskController {
 	private final TaskService taskService;
 	@Autowired

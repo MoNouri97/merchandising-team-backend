@@ -38,13 +38,12 @@ private int day;
 private String state;
 
 @OneToOne(fetch = FetchType.LAZY,
-cascade =  CascadeType.ALL)
+cascade =  CascadeType.MERGE)
 private GMS gms;
 
 
-@ManyToOne
-private Merchandiser merchandiser;
-@JsonIgnore
+
+//@JsonIgnore
 @ManyToOne
 private Planning planning;
 
@@ -52,24 +51,6 @@ public Task() {
 	super();
 }
 
-public Task(int day, String state, GMS gms, Merchandiser merchandiser, Planning planning) {
-	super();
-	this.day = day;
-	this.state = state;
-	this.gms = gms;
-	this.merchandiser = merchandiser;
-	this.planning = planning;
-}
-
-public Task(Long id, int day, String state, GMS gms, Merchandiser merchandiser, Planning planning) {
-	super();
-	this.id = id;
-	this.day = day;
-	this.state = state;
-	this.gms = gms;
-	this.merchandiser = merchandiser;
-	this.planning = planning;
-}
 
 public Long getId() {
 	return id;
@@ -103,19 +84,29 @@ public void setGms(GMS gms) {
 	this.gms = gms;
 }
 
-public Merchandiser getMerchandiser() {
-	return merchandiser;
-}
-
-public void setMerchandiser(Merchandiser merchandiser) {
-	this.merchandiser = merchandiser;
-}
 
 public Planning getPlanning() {
 	return planning;
 }
 
 public void setPlanning(Planning planning) {
+	this.planning = planning;
+}
+
+public Task(int day, String state, GMS gms, Planning planning) {
+	super();
+	this.day = day;
+	this.state = state;
+	this.gms = gms;
+	this.planning = planning;
+}
+
+public Task(Long id, int day, String state, GMS gms, Planning planning) {
+	super();
+	this.id = id;
+	this.day = day;
+	this.state = state;
+	this.gms = gms;
 	this.planning = planning;
 }
 

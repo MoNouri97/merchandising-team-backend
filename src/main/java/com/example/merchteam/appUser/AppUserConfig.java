@@ -55,13 +55,13 @@ public class AppUserConfig {
 //			GMS v4 =new GMS("gms4","image1",20,12.2,12.2);
 //			task3.setGms(v3);
 //			task4.setGms(v4);
-//			final Merchandiser merchandiser2 = new Merchandiser(
-//				passwordEncoder.encode("0000"),
-//				"merchandiser 2",
-//				"merch@spring.co",
-//				"12123123",
-//				LocalDate.of(1999, 2, 9)
-//			);
+			final Merchandiser merchandiser2 = new Merchandiser(
+				passwordEncoder.encode("0000"),
+				"merchandiser 2",
+				"merch2@spring.co",
+				"12123123",
+				LocalDate.of(1999, 2, 9)
+			);
 //			merchandiser2.getTasks().add(task3);
 //			merchandiser2.getTasks().add(task4);
 //			
@@ -81,7 +81,7 @@ public class AppUserConfig {
 			);
 
 			merchRepo.save(merchandiser);
-			//merchRepo.save(merchandiser2);
+			merchRepo.save(merchandiser2);
 			sVisorRepo.save(supervisor);
 			adminRepo.save(admin);
 

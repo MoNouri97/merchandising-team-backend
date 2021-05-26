@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EventRepository<T extends Event> extends JpaRepository<T, Long> {
 
-	@Modifying
+	@Modifying//for update and insert
 	@Query(value = "UPDATE Event SET report_id = ?2 WHERE id IN ?1", nativeQuery = true)
 	void updateEvents(Collection<Long> events, Long reportId);
 

@@ -8,13 +8,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
-@EnableWebMvc
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig {
 
-	
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/*").allowedOrigins("http://localhost:8080");
+	@Bean
+	public WebMvcConfigurer configCors() {
+		return new WebMvcConfigurer() {
 
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/login").allowedMethods("*").allowedHeaders("*").allowedOrigins("*");
+			}
+
+		};
 	}
 }

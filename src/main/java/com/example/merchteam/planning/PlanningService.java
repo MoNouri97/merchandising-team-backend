@@ -1,24 +1,30 @@
 package com.example.merchteam.planning;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service
 public class PlanningService {
-	private final PlanningRepository planningRepository;
+	
 	@Autowired
-	public PlanningService(PlanningRepository planningRepositor) {
-		this.planningRepository = planningRepositor;
-	}
+	private TaskRepository taskRepository;
+	@Autowired
+	private PlanningRepository planningRepository;
 
 	public List<Planning> getPlanning() {
 		return planningRepository.findAll();
 	}
-
+	
+	@Transactional
 	public void addPlanning(Planning planning) {
-		planningRepository.save(planning);
-		
+		Planning pl =planningRepository.save(planning);
+		var idList =planning.getTasks().stream().map(e -> e.getId()).collect(Collectors.toList());
+		taskRepository.saveAll(planning.getTasks());
+		taskRepository.updateTasks(idList, pl.getId());
 	}
 
 }
