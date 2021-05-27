@@ -23,6 +23,8 @@ import com.example.merchteam.planning.Task;
 import com.example.merchteam.reclamation.Reclamation;
 import com.example.merchteam.report.Report;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "gms")
@@ -46,7 +48,7 @@ private double longitude;
 private double latitude;
 
 @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-@JsonIgnore
+@JsonProperty(access = Access.WRITE_ONLY)
 private Set<Article> articles = new HashSet<>();
 @OneToMany(mappedBy = "gms")
 @JsonIgnore

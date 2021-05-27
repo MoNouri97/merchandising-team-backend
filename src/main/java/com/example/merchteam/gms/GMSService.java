@@ -2,6 +2,7 @@ package com.example.merchteam.gms;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import com.example.merchteam.article.Article;
 import com.example.merchteam.article.ArticleRepository;
@@ -73,4 +74,9 @@ public class GMSService {
 		// return gms;
 	}
 
+	public GMS updateProductList(Long id, Set<Article> articles) {
+		GMS gms = gmsRepository.findById(id).orElseThrow();
+		gms.setArticles(articles);
+		return gmsRepository.save(gms);
+	}
 }

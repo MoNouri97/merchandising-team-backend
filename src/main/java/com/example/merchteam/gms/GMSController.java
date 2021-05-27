@@ -1,7 +1,6 @@
 package com.example.merchteam.gms;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,8 +25,9 @@ public class GMSController {
 	}
 
 	@PostMapping(path = "/{id}/products")
-	public GMS addProducts(@PathVariable("id") Long id, @RequestBody Map<String, Long[]> body) {
-		return gmsService.addProductsToGms(id, body.get("articles"));
+	public GMS updateProducts(@PathVariable("id") Long id, @RequestBody GMS body) {
+		System.out.println("body: " + body);
+		return gmsService.updateProductList(id,body.getArticles() );
 	}
 
 	// CRUD
