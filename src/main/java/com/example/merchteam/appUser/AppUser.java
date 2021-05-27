@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -35,16 +36,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class AppUser implements UserDetails {
-	/**
-	 * 
-	 *
-	 */
-	private static final long serialVersionUID = -7229266270619600865L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String password;
 	private String name;
+
+	@Column(unique = true)
 	private String email;
 	private String phone;
 	@Enumerated(EnumType.STRING)
