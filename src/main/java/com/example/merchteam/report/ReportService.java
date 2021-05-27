@@ -32,7 +32,8 @@ public class ReportService {
 		Report savedReport = reportRepository.save(report);
 		// update event.report_id
 		var idList = report.getEvents().stream().map(e -> e.getId()).collect(Collectors.toList());
-		eventRepository.saveAll(report.getEvents());
+		// FIXME : this in tasks
+		// eventRepository.saveAll(report.getEvents());
 		eventRepository.updateEvents(idList, savedReport.getId());
 
 		return savedReport;

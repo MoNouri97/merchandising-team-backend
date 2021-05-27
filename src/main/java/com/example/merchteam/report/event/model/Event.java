@@ -16,16 +16,16 @@ import javax.persistence.SequenceGenerator;
 import com.example.merchteam.article.Article;
 import com.example.merchteam.report.Report;
 import com.example.merchteam.report.event.EventType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-// @JsonDeserialize(using = EventDeserializer.class)
 @Getter
 @Setter
 @JsonTypeInfo(
@@ -56,11 +56,11 @@ public abstract class Event {
 	@Enumerated(EnumType.STRING)
 	private EventType type;
 
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Article product;
 
-	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Report report;
 }

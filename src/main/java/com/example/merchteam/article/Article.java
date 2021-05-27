@@ -10,12 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.example.merchteam.category.Category;
 import com.example.merchteam.gms.GMS;
+import com.example.merchteam.report.event.model.Event;
 import com.example.merchteam.report.event.model.Rupture;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table
 public class Article {
@@ -37,11 +40,17 @@ private String codeProduit;
 private String prix;
 private String poid;
 
+@JsonIgnore
 @ManyToMany(mappedBy = "articles", fetch = FetchType.LAZY)
 private Set<GMS> gmsList = new HashSet<>();
 
+@JsonIgnore
 @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
 private Set<Rupture> ruptures = new HashSet<>();
+
+@JsonIgnore
+@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+private Set<Event> events = new HashSet<>();
 
 @ManyToOne
 private Category category;
