@@ -47,7 +47,7 @@ private int estimatedTime;
 private double longitude;
 private double latitude;
 
-@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 @JsonProperty(access = Access.WRITE_ONLY)
 private Set<Article> articles = new HashSet<>();
 @OneToMany(mappedBy = "gms")
