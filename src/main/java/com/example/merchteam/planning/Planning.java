@@ -44,7 +44,6 @@ private List<Task> tasks=new ArrayList<>();
 @OneToOne(fetch = FetchType.EAGER,
 cascade =  CascadeType.MERGE)
 private Merchandiser merchandiser;
-//@JsonIgnore
 
 
 public Planning() {

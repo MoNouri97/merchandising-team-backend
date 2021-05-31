@@ -32,4 +32,9 @@ public class PlanningService {
 		return planningRepository.findPlanningByMerchandiserId(merchandiserId).orElse(null);
 	}
 
+	public void deleteByMerchandiser(Long id) {
+		planningRepository.deletePlanningByMerchandiserId(id);
+		
+	}
+
 }

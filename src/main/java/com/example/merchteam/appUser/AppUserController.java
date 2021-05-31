@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.merchteam.security.ApplicationUserRole;
+
 @RestController
-@CrossOrigin(origins = "*" )
+//@CrossOrigin(origins = "*" )
 @RequestMapping("/api/v1/user")
 public class AppUserController {
 
@@ -32,11 +34,16 @@ public class AppUserController {
 	public List<AppUser> getAllUsers() {
 		return userService.getAppUsers();
 	}
+	@GetMapping(value = "role/{role}")
+	public List<AppUser> getAppUserByRole(@PathVariable ApplicationUserRole role) {
+		return userService.getAppUserByRole(role);
+	}
 
 	@GetMapping(value = "/{id}")
 	public AppUser getAppUser(@PathVariable Long id) {
 		return userService.getAppUser(id);
 	}
+	
 
 	//@Secured("ROLE_ADMIN")
 	@PostMapping()
