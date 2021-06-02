@@ -1,12 +1,7 @@
 package com.example.merchteam.article;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,6 +92,14 @@ public class ArticleService {
 	}
 	public Article getArticleParId(Long articleId) {
 		return articleRepository.findById(articleId).orElseThrow(()->new IllegalStateException("article with id"+articleId+"does not exist"));
+	}
+
+	public List<Article> getArticleByCategory(Long category) {
+		return articleRepository.findByCategoryId(category);
+	}
+
+	public List<Article> getArticleByGMS(Long gms) {
+		return articleRepository.findByGmsListId(gms);
 	}
 
 }
