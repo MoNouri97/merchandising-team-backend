@@ -33,3 +33,5 @@ build/
 .vscode/
 ### mobile APP ###
 app
+# uploaded Files
+src/main/resources/static/upload
