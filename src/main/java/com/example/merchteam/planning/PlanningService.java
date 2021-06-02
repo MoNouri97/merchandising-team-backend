@@ -27,6 +27,7 @@ public class PlanningService {
 	}
 
 	public Planning getPlanningPerMerchandiserId(Long merchandiserId) {	
+		System.out.println("get action     "+merchandiserId);
 		return planningRepository.findPlanningByMerchandiserId(merchandiserId).orElse(null);
 	}
 	@Transactional

@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.merchteam.appUser.AppUser;
 import com.example.merchteam.competitor.Competitor;
 
 
@@ -26,6 +28,10 @@ public class TaskController {
 	@GetMapping
 	public List<Task> getTasks() {
 		return  taskService.getTasks();
+	}
+	@GetMapping(value = "/{id}")
+	public Task getTaskById(@PathVariable Long id) {
+		return taskService.getTaskById(id);
 	}
 	@PostMapping
 	public void addTask(@RequestBody Task task) {
