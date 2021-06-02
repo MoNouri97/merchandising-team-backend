@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 @EnableWebSecurity
@@ -31,8 +30,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.csrf()
 			.disable()
-			.cors()
-			.and()
+			.cors();
+			/*.and()
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)//tell spring security to use the filter 
 			
@@ -45,7 +44,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/api/**")
 			.authenticated()
 			.anyRequest()
-			.permitAll();// anyone can access those urls
+			.authenticated();*/
 	}
 
 	//this is for authentification

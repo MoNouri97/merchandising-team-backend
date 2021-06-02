@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.merchteam.appUser.AppUser;
 @Service
 public class TaskService {
 	private final TaskRepository taskRepository;
@@ -15,6 +17,17 @@ public class TaskService {
 		return taskRepository.findAll();
 	}
 	public void addTask(Task task) {
+		taskRepository.save(task);
+		
+	}
+	public Task getTaskById(Long id) {
+		return taskRepository.findById(id)
+				.orElseThrow(() -> new IllegalStateException("Task with id " + id + " does not exist"));
+	}
+	public void updateTaskById(Long id, String state) {
+		var task =taskRepository.findById(id)
+				.orElseThrow(() -> new IllegalStateException("Task with id " + id + " does not exist"));
+		task.setState(state);
 		taskRepository.save(task);
 		
 	}

@@ -35,11 +35,11 @@ public class Planning {
 			generator="planning_sequence"
 	)
 private Long id;
-@JsonFormat(pattern = "yyyy-MM-dd")
+@JsonFormat(pattern = "dd-MM-yyyy")
 private LocalDate startDate;
-@JsonFormat(pattern = "yyyy-MM-dd")
+@JsonFormat(pattern = "dd-MM-yyyy")
 private LocalDate endDate;
-@OneToMany(mappedBy = "planning",cascade = CascadeType.ALL)
+@OneToMany(mappedBy = "planning",cascade = {CascadeType.ALL})
 private List<Task> tasks=new ArrayList<>();
 @OneToOne(fetch = FetchType.EAGER,
 cascade =  CascadeType.MERGE)
