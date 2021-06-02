@@ -1,5 +1,7 @@
 package com.example.merchteam.security;
 
+import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -77,11 +79,7 @@ public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
 		// to display dates correctly (dd/MM/yyyy)
 		mapper.registerModule(new JavaTimeModule());
 
+		response.addHeader(CONTENT_TYPE, "application/json");
 		mapper.writeValue(response.getWriter(), authResponse);
-		response.addHeader("Access-Control-Allow-Origin", "*");
-		response.addHeader("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,authorization");
-		response.addHeader("Access-Control-Expose-Headers", "Access-Control-Allow-Origin, Access-Control-Allow-Credentials, authorization");
-		response.addHeader("Access-Control-Expose-Methods", "POST,GET,PUT,DELETE,PATCH");
-		response.addHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE,PATCH");
 	}
 }

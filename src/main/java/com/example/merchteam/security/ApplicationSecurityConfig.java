@@ -31,8 +31,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.csrf()
 			.disable()
-			.cors();
-			/*.and()
+			.cors()
+			.and()
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)//tell spring security to use the filter 
 			
@@ -41,11 +41,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 			.addFilterAfter(new JwtValidateFilter(jwtUtil), JwtAuthFilter.class)
 			
 			.authorizeRequests()
-			.antMatchers("/", "/login", "/css/*", "/js/*", "/chat/**")
-			.permitAll() // anyone can access those urls
-			
+			// .antMatchers("/", "/login", "/css/*", "/js/*", "/chat/**", "/resources/*")
+			.antMatchers("/api/**")
+			.authenticated()
 			.anyRequest()
-			.authenticated();*/
+			.permitAll();// anyone can access those urls
 	}
 
 	//this is for authentification
