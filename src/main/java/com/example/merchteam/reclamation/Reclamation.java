@@ -36,12 +36,6 @@ public class Reclamation {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private ClaimType type;
 
-	public Reclamation(String content, GMS gms, AppUser merchandiser, ClaimType type) {
-		this.content = content;
-		this.gms = gms;
-		this.merchandiser = merchandiser;
-		this.type = type;
-	}
-	
-	
+	private String image;
+
 }

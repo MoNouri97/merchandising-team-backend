@@ -2,10 +2,12 @@ package com.example.merchteam.report.event.model;
 
 import javax.persistence.Entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class BeforeAfter extends Event {
