@@ -56,11 +56,10 @@ private Set<Reclamation> reclamations = new HashSet<>();
 @OneToMany(mappedBy = "gms")
 private Set<Report> reports = new HashSet<>();
 
-@OneToOne(fetch = FetchType.LAZY,
-cascade =  CascadeType.ALL,
+@OneToMany(fetch = FetchType.LAZY,
 mappedBy = "gms")
 @JsonIgnore
-private Task task;
+private Set<Task> tasks = new HashSet<>();
 
 @JsonIgnore
 @ManyToMany(mappedBy="gms")
@@ -70,8 +69,10 @@ public GMS() {
 	super();
 }
 
+
+
 public GMS(String name, String image, int estimatedTime, double longitude, double latitude, Set<Article> articles,
-		Set<Reclamation> reclamations, Task task, Set<Competitor> competitors) {
+		Set<Reclamation> reclamations, Set<Report> reports, Set<Task> tasks, Set<Competitor> competitors) {
 	super();
 	this.name = name;
 	this.image = image;
@@ -80,12 +81,16 @@ public GMS(String name, String image, int estimatedTime, double longitude, doubl
 	this.latitude = latitude;
 	this.articles = articles;
 	this.reclamations = reclamations;
-	this.task = task;
+	this.reports = reports;
+	this.tasks = tasks;
 	this.competitors = competitors;
 }
 
+
+
 public GMS(Long id, String name, String image, int estimatedTime, double longitude, double latitude,
-		Set<Article> articles, Set<Reclamation> reclamations, Task task, Set<Competitor> competitors) {
+		Set<Article> articles, Set<Reclamation> reclamations, Set<Report> reports, Set<Task> tasks,
+		Set<Competitor> competitors) {
 	super();
 	this.id = id;
 	this.name = name;
@@ -95,9 +100,12 @@ public GMS(Long id, String name, String image, int estimatedTime, double longitu
 	this.latitude = latitude;
 	this.articles = articles;
 	this.reclamations = reclamations;
-	this.task = task;
+	this.reports = reports;
+	this.tasks = tasks;
 	this.competitors = competitors;
 }
+
+
 
 public Long getId() {
 	return id;
@@ -163,13 +171,6 @@ public void setReclamations(Set<Reclamation> reclamations) {
 	this.reclamations = reclamations;
 }
 
-public Task getTask() {
-	return task;
-}
-
-public void setTask(Task task) {
-	this.task = task;
-}
 
 public Set<Competitor> getCompetitors() {
 	return competitors;
@@ -177,6 +178,22 @@ public Set<Competitor> getCompetitors() {
 
 public void setCompetitors(Set<Competitor> competitors) {
 	this.competitors = competitors;
+}
+
+public Set<Report> getReports() {
+	return reports;
+}
+
+public void setReports(Set<Report> reports) {
+	this.reports = reports;
+}
+
+public Set<Task> getTasks() {
+	return tasks;
+}
+
+public void setTasks(Set<Task> tasks) {
+	this.tasks = tasks;
 }
 
 

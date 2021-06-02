@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.merchteam.security.ApplicationUserRole;
+
 @Service
 public class AppUserService<T extends AppUser> implements UserDetailsService {
 
@@ -99,4 +101,12 @@ public class AppUserService<T extends AppUser> implements UserDetailsService {
 		return userRepository.findByEmail(username)
 			.orElseThrow(() -> new UsernameNotFoundException("User name not found"));
 	}
+
+	public List<AppUser> getAppUserByRole(ApplicationUserRole role) {
+		// TODO Auto-generated method stub
+		return userRepository.findByRole(role);
+	}
+
+
+	
 }

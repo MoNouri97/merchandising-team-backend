@@ -37,8 +37,8 @@ private Long id;
 private int day;
 private String state;
 
-@OneToOne(fetch = FetchType.EAGER,
-cascade =  CascadeType.MERGE)
+@ManyToOne(fetch = FetchType.EAGER
+/*cascade =  CascadeType.MERGE*/)
 private GMS gms;
 
 
