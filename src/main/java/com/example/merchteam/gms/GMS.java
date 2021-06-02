@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -53,6 +51,7 @@ private Set<Article> articles = new HashSet<>();
 @OneToMany(mappedBy = "gms")
 @JsonIgnore
 private Set<Reclamation> reclamations = new HashSet<>();
+@JsonIgnore
 @OneToMany(mappedBy = "gms")
 private Set<Report> reports = new HashSet<>();
 
