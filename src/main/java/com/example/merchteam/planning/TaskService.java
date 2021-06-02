@@ -24,5 +24,12 @@ public class TaskService {
 		return taskRepository.findById(id)
 				.orElseThrow(() -> new IllegalStateException("Task with id " + id + " does not exist"));
 	}
+	public void updateTaskById(Long id, String state) {
+		var task =taskRepository.findById(id)
+				.orElseThrow(() -> new IllegalStateException("Task with id " + id + " does not exist"));
+		task.setState(state);
+		taskRepository.save(task);
+		
+	}
 	
 }
