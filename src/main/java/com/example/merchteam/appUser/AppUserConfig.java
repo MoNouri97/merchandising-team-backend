@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.merchteam.gms.GMS;
 import com.example.merchteam.planning.Task;
 
-@Configuration
+//@Configuration
 public class AppUserConfig {
 
 	private final PasswordEncoder passwordEncoder;
@@ -22,7 +22,7 @@ public class AppUserConfig {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	@Bean
+//	@Bean
 	CommandLineRunner commandLineRunner(
 		AppUserRepository<Merchandiser> merchRepo,
 		AppUserRepository<Admin> adminRepo,

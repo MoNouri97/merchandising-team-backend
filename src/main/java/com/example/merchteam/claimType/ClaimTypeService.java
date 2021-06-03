@@ -1,6 +1,7 @@
 package com.example.merchteam.claimType;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,22 @@ public class ClaimTypeService {
 
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+
+	public ClaimType updateClaimType(Long id, ClaimType claimType) {
+		return repository.findById(id).map(claimTypeTokenvariable -> {
+			if (
+					claimType.getName() != null && claimType.getName().length() > 0
+					&& !Objects.equals(claimTypeTokenvariable.getName(), claimType.getName())
+			) {
+				claimTypeTokenvariable.setName(claimType.getName());
+			}
+			return repository.save(claimTypeTokenvariable);
+		})
+			.orElseThrow(
+				() -> new IllegalStateException("claim type with id" + id + "does not exist")
+			);
+		
 	}
 
 }
