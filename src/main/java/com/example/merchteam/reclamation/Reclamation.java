@@ -29,11 +29,11 @@ public class Reclamation {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reclamation_sequence")
 	private Long id;
 	private String content;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne( cascade = CascadeType.MERGE)
 	private GMS gms;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne( cascade = CascadeType.MERGE)
 	private AppUser merchandiser;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne( cascade = CascadeType.MERGE)
 	private ClaimType type;
 
 	private String image;

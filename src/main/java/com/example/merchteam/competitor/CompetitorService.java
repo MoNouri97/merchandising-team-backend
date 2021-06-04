@@ -48,10 +48,6 @@ public class CompetitorService {
 				competitor.setName(crt.getName());
 			}
 			 
-				competitor.setCategories(crt.getCategories());
-			
-			 
-				competitor.setGms(crt.getGms());
 			
 			return competitorRepository.save(competitor);
 		})
