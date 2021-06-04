@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,23 +38,16 @@ public class LeaveRequest {
 	private LocalDate endDate;
 	private String reason;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private AppUser requester;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Admin reviewer;
 
-	public LeaveRequest(
-		LocalDate startDate,
-		LocalDate endDate,
-		String reason,
-		AppUser requester,
-		Admin reviewer
-	) {
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.reason = reason;
-		this.requester = requester;
-		this.reviewer = reviewer;
+	@Enumerated(EnumType.STRING)
+	private LeaveRequestState state = LeaveRequestState.WAITING;
+
+	public enum LeaveRequestState {
+		ACCEPTED, REFUSED, WAITING
 	}
 
 }
