@@ -57,7 +57,7 @@ public abstract class Event {
 	private EventType type;
 
 	@JsonProperty(access = Access.WRITE_ONLY)
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne( cascade = CascadeType.MERGE)
 	private Article product;
 
 	@JsonProperty(access = Access.WRITE_ONLY)
