@@ -38,4 +38,9 @@ public class ReportService {
 
 		return savedReport;
 	}
+
+	public void delete(Long id) {
+		eventRepository.deleteById(id);
+		
+	}
 }
