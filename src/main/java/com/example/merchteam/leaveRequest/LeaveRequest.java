@@ -46,6 +46,8 @@ public class LeaveRequest {
 	@Enumerated(EnumType.STRING)
 	private LeaveRequestState state = LeaveRequestState.WAITING;
 
+	private String image;
+
 	public enum LeaveRequestState {
 		ACCEPTED, REFUSED, WAITING
 	}

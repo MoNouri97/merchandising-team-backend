@@ -63,8 +63,12 @@ public class ChatService {
 			.getPrincipal();
 
 		Pageable pageable = PageRequest.of(page, count);
+		List<Long> conversationList = List.of(fromId);
+		if (fromId >= 0) {
+			conversationList.add(userInfo.getId());
+		}
 		Page<ChatMessage> messages = chatMessageRepository.findConversation(
-			List.of(fromId, userInfo.getId()),
+			conversationList,
 			pageable
 		);
 		return messages;

@@ -34,6 +34,7 @@ public class JwtValidateFilter extends OncePerRequestFilter {
 		IOException {
 		String authHeader = request.getHeader(jwtUtil.getAuthorizationHeader());
 		String jwt = jwtUtil.extractToken(authHeader);
+		System.out.println("request: " + request.getRequestURL());
 		// no token present
 		if (jwt == null) {
 			filterChain.doFilter(request, response);

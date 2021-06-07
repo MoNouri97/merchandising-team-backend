@@ -42,6 +42,8 @@ public class ChatMessage {
 	private AppUser receiver;
 	private Timestamp date;
 
+	private String document;
+
 	public ChatMessage(String content, AppUser sender, AppUser receiver) {
 		this.content = content;
 		this.sender = sender;

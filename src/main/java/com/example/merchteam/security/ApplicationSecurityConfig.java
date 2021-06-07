@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 @EnableWebSecurity
@@ -30,21 +31,21 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.csrf()
 			.disable()
-			.cors();
-			/*.and()
+			.cors()
+			.and()
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)//tell spring security to use the filter 
 			
 			.and()
 			.addFilter(new JwtAuthFilter(authenticationManager(), jwtUtil))
 			.addFilterAfter(new JwtValidateFilter(jwtUtil), JwtAuthFilter.class)
-			
-			.authorizeRequests()
+
 			// .antMatchers("/", "/login", "/css/*", "/js/*", "/chat/**", "/resources/*")
+			.authorizeRequests()
 			.antMatchers("/api/**")
 			.authenticated()
 			.anyRequest()
-			.authenticated();*/
+			.permitAll();
 	}
 
 	//this is for authentification

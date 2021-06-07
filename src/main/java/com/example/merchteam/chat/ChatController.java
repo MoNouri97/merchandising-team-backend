@@ -8,7 +8,6 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
 // import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +31,7 @@ public class ChatController {
 	@SendTo("/topic/messages/{to}")
 	public ChatMessage sendMessage(
 		@DestinationVariable Long to,
-		@Payload ChatMessagePayload chatMessage,
-		StompHeaderAccessor accessor
+		@Payload ChatMessagePayload chatMessage
 	) {
 		// System.out.println("********** user: " + accessor.getUser());
 		return chatService.addChatMessage(chatMessage, to);
@@ -47,6 +45,7 @@ public class ChatController {
 	public static class ChatMessagePayload {
 		private Long sender;
 		private String content;
+		private String document;
 	}
 
 	@ResponseBody
@@ -63,6 +62,7 @@ public class ChatController {
 		@RequestParam int offset,
 		@PathVariable Long fromId
 	) {
+		System.out.println("fromId: " + fromId);
 		Slice<ChatMessage> result = chatService.getLatestWithId(count, offset, fromId);
 		return new MessageList(result.getContent(), !result.isLast());
 	}
