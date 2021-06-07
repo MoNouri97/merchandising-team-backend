@@ -56,7 +56,7 @@ public abstract class Event {
 	@Enumerated(EnumType.STRING)
 	private EventType type;
 
-	@JsonProperty(access = Access.WRITE_ONLY)
+//	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne( cascade = CascadeType.MERGE)
 	private Article product;
 

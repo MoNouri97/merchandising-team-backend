@@ -1,6 +1,7 @@
 package com.example.merchteam.leaveRequest;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,19 @@ public class LeaveRequestService {
 
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+
+	public LeaveRequest updateLeaveRequest(Long id, LeaveRequest leaveRequest) {
+		return repository.findById(id).map(leaveRequestTokenvariable -> {
+			 
+				leaveRequestTokenvariable.setState(leaveRequest.getState());
+			
+			return repository.save(leaveRequestTokenvariable);
+		})
+			.orElseThrow(
+				() -> new IllegalStateException("leave request with id" + id + "does not exist")
+			);
+		
 	}
 
 }
