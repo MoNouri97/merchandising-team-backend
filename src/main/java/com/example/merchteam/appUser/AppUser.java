@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import com.example.merchteam.chat.ChatMessage;
 import com.example.merchteam.leaveRequest.LeaveRequest;
 import com.example.merchteam.reclamation.Reclamation;
+import com.example.merchteam.report.Report;
 import com.example.merchteam.security.ApplicationUserRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -63,6 +64,9 @@ public class AppUser implements UserDetails {
 	@JsonIgnore
 	@OneToMany(mappedBy = "requester")
 	private Set<LeaveRequest> leaveRequests = new HashSet<>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "merchandiser")
+	private Set<Report> reports = new HashSet<>();
 
 	public AppUser(
 		String password,

@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.example.merchteam.appUser.AppUser;
 import com.example.merchteam.gms.GMS;
 import com.example.merchteam.report.event.model.Event;
 
@@ -38,6 +39,9 @@ public class Report {
 
 	@ManyToOne
 	private GMS gms;
+
+	@ManyToOne
+	private AppUser merchandiser;
 
 	public Report(
 		LocalDateTime dateTime,
