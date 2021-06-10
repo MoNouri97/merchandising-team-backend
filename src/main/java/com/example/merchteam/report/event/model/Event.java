@@ -40,7 +40,7 @@ import lombok.Setter;
 		@Type(value = CompetitorEvent.class, name = "CompetitorEvent"),
 		@Type(value = NewProduct.class, name = "NewProduct"),
 		@Type(value = PriceChange.class, name = "PriceChange"),
-		@Type(value = ProductsVsCompetitor.class, name = "ProductsVsCompetitor"),
+		@Type(value = ProductsVsCompetitor.class, name = "ProductVsCompetitor"),
 		@Type(value = Promotion.class, name = "Promotion"),
 		@Type(value = Rupture.class, name = "Rupture") }
 )

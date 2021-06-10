@@ -40,7 +40,7 @@ public class ReportService {
 	}
 
 	public void delete(Long id) {
-		eventRepository.deleteById(id);
+		reportRepository.deleteById(id);
 		
 	}
 }

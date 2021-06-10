@@ -1,5 +1,6 @@
 package com.example.merchteam.chat;
 
+import java.util.HashSet;
 import java.util.List;
 
 import com.example.merchteam.appUser.AppUser;
@@ -63,7 +64,8 @@ public class ChatService {
 			.getPrincipal();
 
 		Pageable pageable = PageRequest.of(page, count);
-		List<Long> conversationList = List.of(fromId);
+		HashSet<Long> conversationList = new HashSet<>();
+		conversationList.add(fromId);
 		if (fromId >= 0) {
 			conversationList.add(userInfo.getId());
 		}

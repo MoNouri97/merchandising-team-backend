@@ -36,7 +36,7 @@ public class AppUserService<T extends AppUser> implements UserDetailsService {
 		if (AppUserOptional.isPresent()) {
 			throw new IllegalStateException("email already taken");
 		}
-		//appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+		appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
 		return userRepository.save(appUser);
 	}
 
@@ -50,11 +50,13 @@ public class AppUserService<T extends AppUser> implements UserDetailsService {
 
 	@Transactional
 	public T updateAppUser(Long id, AppUser updatedUser) {
+		System.out.println("update use                   "+updatedUser);
 		String name = updatedUser.getName();
 		String email = updatedUser.getEmail();
 		String password = updatedUser.getPassword();
 		String phone = updatedUser.getPhone();
 		LocalDate dob = updatedUser.getDob();
+		var role =updatedUser.getRole();
 		// checking that AppUser exists
 		T user = userRepository.findById(id)
 			.orElseThrow(() -> new IllegalStateException("AppUser with id " + id + " does not exist"));
@@ -87,6 +89,11 @@ public class AppUserService<T extends AppUser> implements UserDetailsService {
 		if ((dob != null) && !dob.isEqual(user.getDob())) {
 			user.setDob(dob);
 		}
+		// role
+				if ((role != null) && !(role==(user.getRole()))) {
+					user.setRole(role);
+				}
+
 
 		return user;
 	}

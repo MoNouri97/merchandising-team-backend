@@ -38,9 +38,10 @@ public class Competitor {
 	private Long id;
 	private String name;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "competitor")
 	private Set<CompetitorEvent> competitorEvents = new HashSet<>();
+	@JsonIgnore
 	@OneToMany(mappedBy = "competitor")
 	private Set<ProductsVsCompetitor> vsCompetitors = new HashSet<>();
 
