@@ -20,6 +20,10 @@ import com.example.merchteam.gms.GMS;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@NoArgsConstructor
 @Entity
 @Table
 public class Planning {
@@ -44,68 +48,6 @@ private List<Task> tasks=new ArrayList<>();
 @OneToOne(fetch = FetchType.EAGER,
 cascade =  CascadeType.MERGE)
 private Merchandiser merchandiser;
-
-
-public Planning() {
-	super();
-}
-
-public Planning(LocalDate startDate, LocalDate endDate, List<Task> tasks, Merchandiser merchandiser) {
-	super();
-	this.startDate = startDate;
-	this.endDate = endDate;
-	this.tasks = tasks;
-	this.merchandiser = merchandiser;
-}
-
-public Planning(Long id, LocalDate startDate, LocalDate endDate, List<Task> tasks, Merchandiser merchandiser) {
-	super();
-	this.id = id;
-	this.startDate = startDate;
-	this.endDate = endDate;
-	this.tasks = tasks;
-	this.merchandiser = merchandiser;
-}
-
-public Long getId() {
-	return id;
-}
-
-public void setId(Long id) {
-	this.id = id;
-}
-
-public LocalDate getStartDate() {
-	return startDate;
-}
-
-public void setStartDate(LocalDate startDate) {
-	this.startDate = startDate;
-}
-
-public LocalDate getEndDate() {
-	return endDate;
-}
-
-public void setEndDate(LocalDate endDate) {
-	this.endDate = endDate;
-}
-
-public List<Task> getTasks() {
-	return tasks;
-}
-
-public void setTasks(List<Task> tasks) {
-	this.tasks = tasks;
-}
-
-public Merchandiser getMerchandiser() {
-	return merchandiser;
-}
-
-public void setMerchandiser(Merchandiser merchandiser) {
-	this.merchandiser = merchandiser;
-}
 
 
 

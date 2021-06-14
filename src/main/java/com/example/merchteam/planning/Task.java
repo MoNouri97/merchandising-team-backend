@@ -1,6 +1,8 @@
 package com.example.merchteam.planning;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,8 +16,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.example.merchteam.appUser.Merchandiser;
+import com.example.merchteam.claimType.ClaimType;
 import com.example.merchteam.gms.GMS;
+import com.example.merchteam.reclamation.Reclamation;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@NoArgsConstructor
 @Entity
 @Table
 public class Task implements Serializable {
@@ -35,6 +45,8 @@ public class Task implements Serializable {
 	)
 private Long id;
 private int day;
+@JsonFormat(pattern = "dd-MM-yyyy")
+private LocalDate taskDate;
 private String state;
 
 @ManyToOne(fetch = FetchType.EAGER
@@ -46,73 +58,5 @@ private GMS gms;
 @JsonIgnore
 @ManyToOne
 private Planning planning;
-
-public Task() {
-	super();
-}
-
-
-public Long getId() {
-	return id;
-}
-
-public void setId(Long id) {
-	this.id = id;
-}
-
-public int getDay() {
-	return day;
-}
-
-public void setDay(int day) {
-	this.day = day;
-}
-
-public String getState() {
-	return state;
-}
-
-public void setState(String state) {
-	this.state = state;
-}
-
-public GMS getGms() {
-	return gms;
-}
-
-public void setGms(GMS gms) {
-	this.gms = gms;
-}
-
-
-public Planning getPlanning() {
-	return planning;
-}
-
-public void setPlanning(Planning planning) {
-	this.planning = planning;
-}
-
-public Task(int day, String state, GMS gms, Planning planning) {
-	super();
-	this.day = day;
-	this.state = state;
-	this.gms = gms;
-	this.planning = planning;
-}
-
-public Task(Long id, int day, String state, GMS gms, Planning planning) {
-	super();
-	this.id = id;
-	this.day = day;
-	this.state = state;
-	this.gms = gms;
-	this.planning = planning;
-}
-
-
-
-
-
 
 }
